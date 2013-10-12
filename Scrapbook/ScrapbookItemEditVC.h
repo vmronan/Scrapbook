@@ -1,0 +1,23 @@
+//
+//  PhotoEditViewController.h
+//  Scrapbook
+//
+//  Created by Vanessa Ronan on 9/28/13.
+//  Copyright (c) 2013 Vanessa Ronan. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "ScrapbookModel.h"
+
+@interface ScrapbookItemEditVC : UIViewController
+
+@property (strong, nonatomic) ScrapbookModel *model;
+@property (strong, nonatomic) ScrapbookItem *item;
+@property (strong, nonatomic) IBOutlet UITextField *titleField;
+@property (strong, nonatomic) IBOutlet UITextField *descriptionField;
+
+- (void)editItem:(ScrapbookItem*)item;
+- (void)editPhotoAtURL:(NSString*)url;
+- (void)showPhotoAtURL:(NSString*)url;
+
+@end
