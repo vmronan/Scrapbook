@@ -28,6 +28,11 @@
     return [UIColor colorWithRed:81.0f/255.0f green:127.0f/255.0f blue:164.0f/255.0f alpha:1.0f];
 }
 
+- (void)setTabBarTintColor
+{
+    self.tabBar.tintColor = [InstagramVC instagramBlue];
+}
+
 - (void)didPressSearch
 {
     // Clear images already there
@@ -104,6 +109,7 @@
 {
     [super viewDidAppear:animated];
     self.navigationController.navigationBar.translucent = NO;
+    [self setTabBarTintColor];
 }
 
 - (void)didReceiveMemoryWarning

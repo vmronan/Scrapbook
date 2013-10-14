@@ -21,9 +21,13 @@
 @property (strong, nonatomic) NSMutableArray *photoURLs;
 @property (strong, nonatomic) NSMutableArray *photoHeights;
 
+@property (strong, nonatomic) UITabBar *tabBar;
+
 + (UIColor*)flickrPink;
 
 - (void)didPressSearch;
 - (void)handleFlickrResponse:(NSMutableDictionary *)response;
+
+- (void)setTabBarTintColor;
 
 @end

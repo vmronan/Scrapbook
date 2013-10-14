@@ -28,6 +28,11 @@
     return [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:132.0f/255.0f alpha:1.0f];
 }
 
+- (void)setTabBarTintColor
+{
+    self.tabBar.tintColor = [FlickrVC flickrPink];
+}
+
 - (void)didPressSearch
 {    
     // Clear images already there
@@ -98,7 +103,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = NO;
+    [self setTabBarTintColor];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -110,6 +115,7 @@
 {
     [super viewDidAppear:animated];
     self.navigationController.navigationBar.translucent = NO;
+    [self setTabBarTintColor];
 }
 
 - (void)didReceiveMemoryWarning
