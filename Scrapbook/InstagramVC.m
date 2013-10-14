@@ -46,6 +46,7 @@
     // Show loading spinner
     self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadingSpinner.center = self.view.center;
+    [self.loadingSpinner setColor:[InstagramVC instagramBlue]];
     [self.view addSubview:self.loadingSpinner];
     [self.loadingSpinner startAnimating];
     

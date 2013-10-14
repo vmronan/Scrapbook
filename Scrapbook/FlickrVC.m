@@ -46,6 +46,7 @@
     // Show loading spinner
     self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadingSpinner.center = self.view.center;
+    [self.loadingSpinner setColor:[FlickrVC flickrPink]];
     [self.view addSubview:self.loadingSpinner];
     [self.loadingSpinner startAnimating];
     
@@ -88,11 +89,6 @@
     [searchButton addTarget:self action:@selector(didPressSearch) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:searchButton];
     return header;
-}
-
-- (void) drawPlaceholderInRect:(CGRect)rect {
-    [[UIColor greenColor] setFill];
-    [self.queryField.placeholder drawInRect:rect withFont:[UIFont systemFontOfSize:16]];
 }
                           
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
