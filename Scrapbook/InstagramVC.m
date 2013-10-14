@@ -18,7 +18,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        [self.view setBackgroundColor:[InstagramVC instagramBlue]];
         [self.view setFrame:[[UIScreen mainScreen] bounds]];
     }
     return self;
@@ -31,8 +30,6 @@
 
 - (void)didPressSearch
 {
-    NSLog(@"pressed search");
-    
     // Clear images already there
     self.photoURLs = [[NSMutableArray alloc] initWithCapacity:0];
     
@@ -71,18 +68,17 @@
 {
     // set needs layout in viewdidappear
     UIView* header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
-    header.backgroundColor = [InstagramVC instagramBlue];
     
     self.queryField = [[UITextField alloc] initWithFrame:CGRectMake(4, 4, 272, 32)];
-    [self.queryField setPlaceholder:@"Search by tag"];
+    [self.queryField setPlaceholder:@"Search Instagram by tag"];
     [self.queryField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.queryField setTextColor:[InstagramVC instagramBlue]];
     [header addSubview:self.queryField];
     
     UIButton *searchButton = [[UIButton alloc] initWithFrame:CGRectMake(278, 0, 40, 40)];
     [searchButton setTitle:@"GO" forState:UIControlStateNormal];
-    [searchButton setBackgroundColor:[InstagramVC instagramBlue]];
-    [searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [searchButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
+    [searchButton setTitleColor:[InstagramVC instagramBlue] forState:UIControlStateNormal];
+    [searchButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [searchButton addTarget:self action:@selector(didPressSearch) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:searchButton];
     return header;

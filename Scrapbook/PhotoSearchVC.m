@@ -25,12 +25,12 @@
         // Create the Flickr view controller
         self.flickrViewController = [[FlickrVC alloc] init];
         self.flickrViewController.model = model;
-        self.flickrViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Flickr" image:[UIImage imageNamed:@"flickr1.png"] tag:1];
+        self.flickrViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Flickr" image:[UIImage imageNamed:@"flickr.png"] tag:1];
         
         // Create the Instagram view controller
         self.instaViewController = [[InstagramVC alloc] init];
         self.instaViewController.model = model;
-        self.instaViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Instagram" image:nil tag:2];
+        self.instaViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Instagram" image:[UIImage imageNamed:@"instagram.png"] tag:2];
         
         // Add the view controllers to the tab bar
         [self setViewControllers:[NSArray arrayWithObjects:self.flickrViewController, self.instaViewController, nil] animated:YES];
