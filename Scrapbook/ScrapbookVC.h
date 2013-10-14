@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ScrapbookItemCellView.h"
 #import "PhotoSearchVC.h"
 #import "ScrapbookItemDetailVC.h"
 
