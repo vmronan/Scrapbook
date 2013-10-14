@@ -79,29 +79,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
     // Configure the cell...
     ScrapbookItem *item = [self.model itemAtIndex:indexPath.row];
-    
-    [[cell textLabel] setText:item.title];
-    
-    NSURL *url = [NSURL URLWithString:item.url];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [UIImage imageWithData:data];
-    [[cell imageView] setImage:image];
-    
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    ScrapbookItemCellView *cellView = [[ScrapbookItemCellView alloc] initWithItem:item];
+    [[cell contentView] setTag:cellView.tag];
+    [[cell contentView] addSubview:cellView];
     
     return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UITableViewCell *cell = (UITableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-//    return [[cell contentView] tag];
-//}
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = (UITableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [[cell contentView] tag];
+}
 
 
 /*
