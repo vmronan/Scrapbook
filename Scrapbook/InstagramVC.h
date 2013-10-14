@@ -21,8 +21,12 @@
 @property (strong, nonatomic) NSMutableArray *photoURLs;
 @property (strong, nonatomic) NSMutableArray *photoHeights;
 
+@property (strong, nonatomic) UITabBar *tabBar;
+
 + (UIColor*)instagramBlue;
 
 - (void)didPressSearch;
 - (void)handleInstagramResponse:(NSMutableDictionary *)response;
+- (void)setTabBarTintColor;
+
 @end

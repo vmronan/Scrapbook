@@ -18,7 +18,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        [self.view setBackgroundColor:[FlickrVC flickrPink]];
         [self.view setFrame:[[UIScreen mainScreen] bounds]];
     }
     return self;
@@ -27,6 +26,11 @@
 + (UIColor*)flickrPink
 {
     return [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:132.0f/255.0f alpha:1.0f];
+}
+
+- (void)setTabBarTintColor
+{
+    self.tabBar.tintColor = [FlickrVC flickrPink];
 }
 
 - (void)didPressSearch
@@ -42,6 +46,7 @@
     // Show loading spinner
     self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.loadingSpinner.center = self.view.center;
+    [self.loadingSpinner setColor:[FlickrVC flickrPink]];
     [self.view addSubview:self.loadingSpinner];
     [self.loadingSpinner startAnimating];
     
@@ -70,18 +75,17 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 {
     UIView* header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
-    header.backgroundColor = [FlickrVC flickrPink];
     
     self.queryField = [[UITextField alloc] initWithFrame:CGRectMake(4, 4, 272, 32)];
-    [self.queryField setPlaceholder:@"Search by tag"];
+    [self.queryField setPlaceholder:@"Search Flickr by tag"];
     [self.queryField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.queryField setTextColor:[FlickrVC flickrPink]];
     [header addSubview:self.queryField];
     
     UIButton *searchButton = [[UIButton alloc] initWithFrame:CGRectMake(278, 0, 40, 40)];
     [searchButton setTitle:@"GO" forState:UIControlStateNormal];
-    [searchButton setBackgroundColor:[FlickrVC flickrPink]];
-    [searchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [searchButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
+    [searchButton setTitleColor:[FlickrVC flickrPink] forState:UIControlStateNormal];
+    [searchButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [searchButton addTarget:self action:@selector(didPressSearch) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:searchButton];
     return header;
@@ -95,7 +99,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = NO;
+    [self setTabBarTintColor];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -107,6 +111,7 @@
 {
     [super viewDidAppear:animated];
     self.navigationController.navigationBar.translucent = NO;
+    [self setTabBarTintColor];
 }
 
 - (void)didReceiveMemoryWarning
