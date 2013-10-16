@@ -34,18 +34,18 @@
 {
     // Add item if it's new, otherwise update existing item
     if(item.rowId == -1) {
-        [Database saveScrapbookItemWithURL:item.url title:item.title description:item.description];
+        [Database saveScrapbookItemWithPath:item.path title:item.title description:item.description];
     }
     else {
-        [Database updateScrapbookItemWithURL:item.url title:item.title description:item.description atRow:item.rowId];
+        [Database updateScrapbookItemWithPath:item.path title:item.title description:item.description atRow:item.rowId];
     }
     
     [self updateItems];
 }
 
-- (void)addItemAtURL:(NSString*)url withTitle:(NSString*)title description:(NSString*)description;
+- (void)addItemAtPath:(NSString*)path withTitle:(NSString*)title description:(NSString*)description;
 {
-    [Database saveScrapbookItemWithURL:url title:title description:description];
+    [Database saveScrapbookItemWithPath:path title:title description:description];
     [self updateItems];
 }
 

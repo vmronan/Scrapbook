@@ -15,8 +15,8 @@
 + (void)createEditableCopyOfDatabaseIfNeeded;
 + (void)initDatabase;
 + (NSMutableArray *)fetchAllItems;
-+ (void)saveScrapbookItemWithURL:(NSString *)url title:(NSString*)title description:(NSString*)description;
-+ (void)updateScrapbookItemWithURL:(NSString *)url title:(NSString *)title description:(NSString *)description atRow:(int)rowId;
++ (void)saveScrapbookItemWithPath:(NSString *)path title:(NSString*)title description:(NSString*)description;
++ (void)updateScrapbookItemWithPath:(NSString *)path title:(NSString *)title description:(NSString *)description atRow:(int)rowId;
 + (void)deleteScrapbookItem:(int)rowid;
 + (void)cleanUpDatabaseForQuit;
 

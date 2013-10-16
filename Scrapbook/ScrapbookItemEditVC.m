@@ -53,25 +53,28 @@
 - (void)editItem:(ScrapbookItem*)item
 {
     self.item = item;
-    [self showPhotoAtURL:item.url];
+    [self showPhotoAtPath:item.path];
 }
 
-- (void)showPhotoAtURL:(NSString*)url
+- (void)showPhotoAtPath:(NSString *)path
 {
+    // Read image from documents folder
+    NSData *pngData = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage imageWithData:pngData];
+    
     // Show image at full width of screen
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
     int screenWidth = self.view.bounds.size.width;
     float imageRatio = image.size.height / image.size.width;
     float scaledImageHeight = screenWidth * imageRatio;
-    
+
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 174, screenWidth, scaledImageHeight)];
     [imageView setImage:image];
     [self.view addSubview:imageView];
 }
 
-- (void)editPhotoAtURL:(NSString*)url
+- (void)editPhotoAtPath:(NSString *)path
 {
-    [self showPhotoAtURL:url];
+    [self showPhotoAtPath:path];
 }
 
 - (void)viewDidLoad

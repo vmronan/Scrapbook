@@ -23,10 +23,9 @@
 {
     self = [super init];
     if (self) {
-        // Initialization code
-        NSURL *url = [NSURL URLWithString:item.url];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        UIImage *image = [UIImage imageWithData:data];
+        // Read image from documents folder and make imageview
+        NSData *pngData = [NSData dataWithContentsOfFile:item.path];
+        UIImage *image = [UIImage imageWithData:pngData];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         
         UITextView *titleView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 340, 30)];

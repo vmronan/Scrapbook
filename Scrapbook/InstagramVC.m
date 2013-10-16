@@ -36,7 +36,8 @@
 - (void)didPressSearch
 {
     // Clear images already there
-    self.photoURLs = [[NSMutableArray alloc] initWithCapacity:0];
+    self.currentNumPhotos = 0;
+    self.photos = [[NSMutableArray alloc] initWithCapacity:0];
     
     // Dismiss keyboard if it's not already gone
     if([self.queryField isFirstResponder]) {
@@ -55,19 +56,29 @@
     self.tagSearcher = [[PhotoTagSearcher alloc] initWithQuery:queryURL target:self action:@selector(handleInstagramResponse:)];
 }
 
-
 - (void)handleInstagramResponse:(NSMutableDictionary *)response
 {
     NSMutableArray *photos = [response objectForKey:@"data"];
     
-    for(int i = 0; i < [photos count]; i++) {
+    self.expectedNumPhotos = [photos count];
+    for(int i = 0; i < self.expectedNumPhotos; i++) {
         NSMutableDictionary *photo = [photos objectAtIndex:i];
         NSString *photoUrl = [[[photo objectForKey:@"images"] objectForKey:@"low_resolution"] objectForKey:@"url"];
-        [self.photoURLs addObject:photoUrl];
+        InternetImageView *download = [[InternetImageView alloc] initWithURLFromString:photoUrl];
+        download.target = self;
+        download.action = @selector(downloadFinished:);
     }
-    
-    [self.tableView reloadData];
-    [self.loadingSpinner stopAnimating];
+}
+
+- (void)downloadFinished:(UIImage*)image
+{
+    [self.photos addObject:image];
+    self.currentNumPhotos++;
+    if(self.currentNumPhotos == self.expectedNumPhotos) {
+        NSLog(@"done downloading photos!");
+        [self.tableView reloadData];
+        [self.loadingSpinner stopAnimating];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
@@ -130,7 +141,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.photoURLs count];
+    return [self.photos count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,18 +153,15 @@
     }
     
     // Get image
-    NSURL *photoURL = [[NSURL alloc] initWithString:[self.photoURLs objectAtIndex:indexPath.row]];
-    NSData *data = [NSData dataWithContentsOfURL:photoURL];
-    UIImage *image = [UIImage imageWithData:data];
+    UIImage *image = [self.photos objectAtIndex:indexPath.row];
     int screenWidth = self.view.bounds.size.width;
     
     // Place image in imageview of correct size
-    float imageRatio = image.size.height / image.size.width;
-    float scaledImageHeight = screenWidth * imageRatio;
-    UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, scaledImageHeight)];
-    [photoView setImage:image];
+    UIImageView *photoView = [[UIImageView alloc] initWithImage:image];
+    [photoView setFrame:CGRectMake(0, 0, screenWidth, screenWidth)];
+    photoView.contentMode = UIViewContentModeScaleAspectFit;
     
-    [[cell contentView] setTag:scaledImageHeight];
+    // Show imageview
     [[cell contentView] addSubview:photoView];
     
     return cell;
@@ -161,9 +169,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = (UITableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return [[cell contentView] tag];
+    // Height of each row is the width of the screen since Instagram photos are square
+    return self.view.bounds.size.width;
 }
+
 
 /*
  // Override to support conditional editing of the table view.
@@ -212,15 +221,15 @@
 {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
+    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
     
     // Pass the selected object to the new view controller.
-    ScrapbookItem *item = [[ScrapbookItem alloc] initWithURL:[self.photoURLs objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
-    [scrapbookItemCreateVC editItem:item];
-    scrapbookItemCreateVC.model = self.model;
+    ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[self.photos objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
+    [scrapbookItemEditVC editItem:item];
+    scrapbookItemEditVC.model = self.model;
     
     // Push the view controller.
-    [self.navigationController pushViewController:scrapbookItemCreateVC animated:YES];
+    [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
     
 }
 
