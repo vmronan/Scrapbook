@@ -90,6 +90,8 @@
     [[cell contentView] setTag:cellView.tag];
     [[cell contentView] addSubview:cellView];
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
 

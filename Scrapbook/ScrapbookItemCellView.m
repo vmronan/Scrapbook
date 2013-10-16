@@ -28,24 +28,28 @@
         UIImage *image = [UIImage imageWithData:pngData];
         
         // Show image at full width of screen
+        float divider = 0.4;
         float imageRatio = image.size.height / image.size.width;
         float scaledImageHeight = screenWidth * imageRatio;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth/2, scaledImageHeight/2)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth*divider, scaledImageHeight*divider)];
         [imageView setImage:image];
         
-        int titleHeight = 30;
-        UITextView *titleView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth/2, 0, screenWidth/2, titleHeight)];
+        int titleHeight = 26;
+        UITextView *titleView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth*divider, 0, screenWidth-(screenWidth*divider), titleHeight)];
         [titleView setText:item.title];
+        titleView.font = [UIFont systemFontOfSize:30];
+        [titleView sizeToFit];
         [titleView setTextColor:[UIColor blackColor]];
         
-        UITextView *descriptionView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth/2, 30, screenWidth/2, scaledImageHeight-titleHeight)];
+        UITextView *descriptionView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth*divider, titleView.bounds.size.height, screenWidth-(screenWidth*divider), scaledImageHeight-titleHeight)];
         [descriptionView setText:item.description];
         [descriptionView setTextColor:[UIColor grayColor]];
         
         [self addSubview:imageView];
         [self addSubview:titleView];
         [self addSubview:descriptionView];
-        [self setTag:scaledImageHeight/2];
+        [self setTag:scaledImageHeight*divider];
+        
     }
     return self;
 }
