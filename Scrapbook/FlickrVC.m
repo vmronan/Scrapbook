@@ -72,6 +72,12 @@
     [self.loadingSpinner stopAnimating];
 }
 
+- (void)downloadFinished:(UIImage*)image
+{
+//    NSLog(@"download finished");
+    NSLog(@"download finished. %f x %f", image.size.width, image.size.height);
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
 {
     UIView* header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 40)];
@@ -143,18 +149,16 @@
     }
     
     // Get image
-    NSURL *photoURL = [[NSURL alloc] initWithString:[self.photoURLs objectAtIndex:indexPath.row]];
-    NSData *data = [NSData dataWithContentsOfURL:photoURL];
-    UIImage *image = [UIImage imageWithData:data];
     int screenWidth = self.view.bounds.size.width;
-    
+    InternetImageView *photoView = [[InternetImageView alloc] initWithURLFromString:[self.photoURLs objectAtIndex:indexPath.row] andFrame:CGRectMake(0, 0, screenWidth, screenWidth)];
+    photoView.target = self;
+    photoView.action = @selector(downloadFinished:);
+    photoView.contentMode = UIViewContentModeScaleAspectFill;
+
     // Place image in imageview of correct size
-    float imageRatio = image.size.height / image.size.width;
-    float scaledImageHeight = screenWidth * imageRatio;
-    UIImageView *photoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, scaledImageHeight)];
-    [photoView setImage:image];
+//    float imageRatio = image.size.height / image.size.width;
+//    float scaledImageHeight = screenWidth * imageRatio;
     
-    [[cell contentView] setTag:scaledImageHeight];
     [[cell contentView] addSubview:photoView];
     
     return cell;
@@ -162,8 +166,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = (UITableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return [[cell contentView] tag];
+    return self.view.bounds.size.width;
 }
 
 /*

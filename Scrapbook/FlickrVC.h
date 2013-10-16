@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoTagSearcher.h"
 #import "ScrapbookItemEditVC.h"
+#import "InternetImageView.h"
 
 @interface FlickrVC : UITableViewController
 
@@ -29,5 +30,6 @@
 - (void)handleFlickrResponse:(NSMutableDictionary *)response;
 
 - (void)setTabBarTintColor;
+- (void)downloadFinished:(UIImage*)image;
 
 @end
