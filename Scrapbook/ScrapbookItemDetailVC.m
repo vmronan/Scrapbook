@@ -46,9 +46,6 @@
     self.itemIndex = index;
     self.item = [self.model itemAtIndex:index];
     
-    // scrollview doesn't seem to work...
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 1000)];
-    
     // Read image from documents folder
     NSData *pngData = [NSData dataWithContentsOfFile:self.item.path];
     UIImage *image = [UIImage imageWithData:pngData];
@@ -57,16 +54,23 @@
     int screenWidth = self.view.bounds.size.width;
     float imageRatio = image.size.height / image.size.width;
     float scaledImageHeight = screenWidth * imageRatio;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, scaledImageHeight)];
+    float scaledImageWidth = screenWidth;
+    NSLog(@"%f > %f", scaledImageHeight, self.view.bounds.size.height-150);
+    if(scaledImageHeight >= self.view.bounds.size.height - 150) {
+        scaledImageHeight = scaledImageHeight-66;
+        scaledImageWidth = scaledImageHeight/imageRatio;
+    }
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-scaledImageWidth)/2, 0, scaledImageWidth, scaledImageHeight)];
     [imageView setImage:image];
-    [scrollView addSubview:imageView];
+    [self.view addSubview:imageView];
     
     // Show title below image
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, scaledImageHeight, screenWidth, 30)];
     title.text = self.item.title;
     title.textAlignment = NSTextAlignmentCenter;
     title.textColor = [UIColor blackColor];
-    [scrollView addSubview:title];
+    [self.view addSubview:title];
     
     // Show description below title
     UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 26+scaledImageHeight, screenWidth, 30)];
@@ -74,9 +78,7 @@
     description.font = [UIFont systemFontOfSize:14];
     description.textAlignment = NSTextAlignmentCenter;
     description.textColor = [UIColor grayColor];
-    [scrollView addSubview:description];
-    
-    [self.view addSubview:scrollView];
+    [self.view addSubview:description];
 }
 
 - (void)viewDidLoad

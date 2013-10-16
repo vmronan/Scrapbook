@@ -86,9 +86,11 @@
     
     // Configure the cell...
     ScrapbookItem *item = [self.model itemAtIndex:indexPath.row];
-    ScrapbookItemCellView *cellView = [[ScrapbookItemCellView alloc] initWithItem:item];
+    ScrapbookItemCellView *cellView = [[ScrapbookItemCellView alloc] initWithItem:item screenWidth:self.view.bounds.size.width];
     [[cell contentView] setTag:cellView.tag];
     [[cell contentView] addSubview:cellView];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }

@@ -26,7 +26,8 @@
     
     // Set scrapbook as root view, attached to nav controller
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.scrapbookVC];
-    
+    self.navController.navigationBar.translucent = NO;
+
     // Show root view with nav controller
     [self.window setRootViewController:self.navController];
     [self.window makeKeyAndVisible];
