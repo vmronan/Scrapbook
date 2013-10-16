@@ -49,8 +49,11 @@
     // scrollview doesn't seem to work...
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 1000)];
     
+    // Read image from documents folder
+    NSData *pngData = [NSData dataWithContentsOfFile:self.item.path];
+    UIImage *image = [UIImage imageWithData:pngData];
+    
     // Show image at full width of screen
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.item.url]]];
     int screenWidth = self.view.bounds.size.width;
     float imageRatio = image.size.height / image.size.width;
     float scaledImageHeight = screenWidth * imageRatio;

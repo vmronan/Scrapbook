@@ -4,6 +4,7 @@
 
 
 
+
 ASYNC:
 problem right now is images are being recycled because they're stored in the cells
 - need to store all data in an array then go through that

@@ -73,7 +73,6 @@
 - (void)downloadFinished:(UIImage*)image
 {
     [self.photos addObject:image];
-    NSLog(@"download finished. %f x %f", image.size.width, image.size.height);
     self.currentNumPhotos++;
     if(self.currentNumPhotos == self.expectedNumPhotos) {
         NSLog(@"done downloading photos!");
@@ -222,15 +221,15 @@
 {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
+    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
     
     // Pass the selected object to the new view controller.
-//    ScrapbookItem *item = [[ScrapbookItem alloc] initWithURL:[self.photoURLs objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
-//    [scrapbookItemCreateVC editItem:item];
-//    scrapbookItemCreateVC.model = self.model;
+    ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[self.photos objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
+    [scrapbookItemEditVC editItem:item];
+    scrapbookItemEditVC.model = self.model;
     
     // Push the view controller.
-    [self.navigationController pushViewController:scrapbookItemCreateVC animated:YES];
+    [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
     
 }
 

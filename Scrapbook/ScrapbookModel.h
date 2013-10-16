@@ -19,8 +19,7 @@
 - (int)numItems;
 
 - (void)saveItem:(ScrapbookItem*)item;
-- (void)addItemAtURL:(NSString*)url withTitle:(NSString*)title description:(NSString*)description;
+- (void)addItemAtPath:(NSString*)path withTitle:(NSString*)title description:(NSString*)description;
 - (void)deleteItemAtIndex:(int)index;
-
 
 @end
