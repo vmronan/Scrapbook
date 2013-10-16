@@ -15,6 +15,7 @@
 		93916225180B4EFE008B270F /* flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = 93916223180B4EFE008B270F /* flickr.png */; };
 		93916226180B4EFE008B270F /* flickr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93916224180B4EFE008B270F /* flickr@2x.png */; };
 		93916230180B9B6B008B270F /* ScrapbookItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9391622F180B9B6B008B270F /* ScrapbookItemCellView.m */; };
+		93916233180BC74E008B270F /* InternetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93916232180BC74E008B270F /* InternetImageView.m */; };
 		93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C87FC017F94BEF0070B7EB /* PhotoTagSearcher.m */; };
 		93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C87FC617F94F330070B7EB /* FlickrVC.m */; };
 		93C87FC917F94F330070B7EB /* FlickrVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C87FC717F94F330070B7EB /* FlickrVC.xib */; };
@@ -50,6 +51,8 @@
 		93916224180B4EFE008B270F /* flickr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr@2x.png"; sourceTree = "<group>"; };
 		9391622E180B9B6B008B270F /* ScrapbookItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrapbookItemCellView.h; sourceTree = "<group>"; };
 		9391622F180B9B6B008B270F /* ScrapbookItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookItemCellView.m; sourceTree = "<group>"; };
+		93916231180BC74E008B270F /* InternetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternetImageView.h; sourceTree = "<group>"; };
+		93916232180BC74E008B270F /* InternetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternetImageView.m; sourceTree = "<group>"; };
 		93C87FBF17F94BEF0070B7EB /* PhotoTagSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagSearcher.h; sourceTree = "<group>"; };
 		93C87FC017F94BEF0070B7EB /* PhotoTagSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagSearcher.m; sourceTree = "<group>"; };
 		93C87FC517F94F330070B7EB /* FlickrVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrVC.h; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 		93C8A8D217F7CBCF00C861C4 /* Scrapbook */ = {
 			isa = PBXGroup;
 			children = (
+				93916231180BC74E008B270F /* InternetImageView.h */,
+				93916232180BC74E008B270F /* InternetImageView.m */,
 				93916223180B4EFE008B270F /* flickr.png */,
 				93916224180B4EFE008B270F /* flickr@2x.png */,
 				9391621B180A3CDC008B270F /* instagram.png */,
@@ -266,6 +271,7 @@
 				93C8A8FB17F7CD6400C861C4 /* ScrapbookItemDetailVC.m in Sources */,
 				93C8A8FF17F7CDC100C861C4 /* ScrapbookVC.m in Sources */,
 				93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */,
+				93916233180BC74E008B270F /* InternetImageView.m in Sources */,
 				93C8A90217F7CE1700C861C4 /* PhotoSearchVC.m in Sources */,
 				93C87FCD17F94F5C0070B7EB /* InstagramVC.m in Sources */,
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,

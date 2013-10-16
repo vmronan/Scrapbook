@@ -17,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *descriptionField;
 
 - (void)editItem:(ScrapbookItem*)item;
-- (void)editPhotoAtURL:(NSString*)url;
-- (void)showPhotoAtURL:(NSString*)url;
+- (void)editPhotoAtPath:(NSString*)path;
+- (void)showPhotoAtPath:(NSString*)path;
 
 @end
