@@ -19,8 +19,9 @@
 @property (strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
 
 @property (strong, nonatomic) ScrapbookModel *model;
-@property (strong, nonatomic) NSMutableArray *photoURLs;
-@property (strong, nonatomic) NSMutableArray *photoHeights;
+@property (strong, nonatomic) NSMutableArray *photos;
+@property int expectedNumPhotos;
+@property int currentNumPhotos;
 
 @property (strong, nonatomic) UITabBar *tabBar;
 
@@ -29,7 +30,7 @@
 - (void)didPressSearch;
 - (void)handleInstagramResponse:(NSMutableDictionary *)response;
 - (void)setTabBarTintColor;
-- (void)downloadFinished;
+- (void)downloadFinished:(UIImage*)image;
 
 
 @end

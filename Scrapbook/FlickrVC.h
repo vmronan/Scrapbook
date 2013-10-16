@@ -19,8 +19,6 @@
 @property (strong, nonatomic) UIActivityIndicatorView *loadingSpinner;
 
 @property (strong, nonatomic) ScrapbookModel *model;
-//@property (strong, nonatomic) NSMutableArray *photoURLs;
-//@property (strong, nonatomic) NSMutableArray *photoHeights;
 @property (strong, nonatomic) NSMutableArray *photos;
 
 @property int expectedNumPhotos;
