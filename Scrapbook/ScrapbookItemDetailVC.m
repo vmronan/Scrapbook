@@ -55,7 +55,6 @@
     float imageRatio = image.size.height / image.size.width;
     float scaledImageHeight = screenWidth * imageRatio;
     float scaledImageWidth = screenWidth;
-    NSLog(@"%f > %f", scaledImageHeight, self.view.bounds.size.height-150);
     if(scaledImageHeight >= self.view.bounds.size.height - 150) {
         scaledImageHeight = scaledImageHeight-66;
         scaledImageWidth = scaledImageHeight/imageRatio;

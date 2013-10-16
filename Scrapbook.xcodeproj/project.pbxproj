@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9325719B180F351A0000B146 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9325719A180F351A0000B146 /* Images.xcassets */; };
+		932571A0180F36650000B146 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719E180F36650000B146 /* app_icon.png */; };
+		932571A1180F36650000B146 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719F180F36650000B146 /* app_icon@2x.png */; };
 		93863FB117FE854400402448 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 93863FB017FE854400402448 /* Database.m */; };
 		93863FB317FE867400402448 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 93863FB217FE867400402448 /* libsqlite3.dylib */; };
 		93863FB517FE910100402448 /* items.sql in Resources */ = {isa = PBXBuildFile; fileRef = 93863FB417FE910100402448 /* items.sql */; };
@@ -41,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9325719A180F351A0000B146 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9325719E180F36650000B146 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_icon.png; path = Scrapbook/app_icon.png; sourceTree = "<group>"; };
+		9325719F180F36650000B146 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "Scrapbook/app_icon@2x.png"; sourceTree = "<group>"; };
 		93863FAF17FE854400402448 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		93863FB017FE854400402448 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		93863FB217FE867400402448 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -108,6 +114,8 @@
 		93C8A8C017F7CBCF00C861C4 = {
 			isa = PBXGroup;
 			children = (
+				9325719E180F36650000B146 /* app_icon.png */,
+				9325719F180F36650000B146 /* app_icon@2x.png */,
 				93C8A8D217F7CBCF00C861C4 /* Scrapbook */,
 				93C8A8CB17F7CBCF00C861C4 /* Frameworks */,
 				93C8A8CA17F7CBCF00C861C4 /* Products */,
@@ -171,6 +179,7 @@
 				93C8A90717F7D48A00C861C4 /* ScrapbookModel.m */,
 				93863FAF17FE854400402448 /* Database.h */,
 				93863FB017FE854400402448 /* Database.m */,
+				9325719A180F351A0000B146 /* Images.xcassets */,
 			);
 			path = Scrapbook;
 			sourceTree = "<group>";
@@ -244,12 +253,15 @@
 				93916225180B4EFE008B270F /* flickr.png in Resources */,
 				93C8A8D717F7CBCF00C861C4 /* InfoPlist.strings in Resources */,
 				93C87FC917F94F330070B7EB /* FlickrVC.xib in Resources */,
+				932571A0180F36650000B146 /* app_icon.png in Resources */,
 				93C8A8DF17F7CBCF00C861C4 /* Default.png in Resources */,
+				932571A1180F36650000B146 /* app_icon@2x.png in Resources */,
 				93C8A8E117F7CBCF00C861C4 /* Default@2x.png in Resources */,
 				93863FB517FE910100402448 /* items.sql in Resources */,
 				9391621D180A3CDC008B270F /* instagram.png in Resources */,
 				9391621E180A3CDC008B270F /* instagram@2x.png in Resources */,
 				93C8A8E317F7CBCF00C861C4 /* Default-568h@2x.png in Resources */,
+				9325719B180F351A0000B146 /* Images.xcassets in Resources */,
 				93C8A8F717F7CD5D00C861C4 /* ScrapbookItemEditVC.xib in Resources */,
 				93916226180B4EFE008B270F /* flickr@2x.png in Resources */,
 				93C8A8FC17F7CD6400C861C4 /* ScrapbookItemDetailVC.xib in Resources */,
@@ -354,10 +366,12 @@
 		93C8A8E717F7CBCF00C861C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Scrapbook/Scrapbook-Prefix.pch";
 				INFOPLIST_FILE = "Scrapbook/Scrapbook-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -366,10 +380,12 @@
 		93C8A8E817F7CBCF00C861C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Scrapbook/Scrapbook-Prefix.pch";
 				INFOPLIST_FILE = "Scrapbook/Scrapbook-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
