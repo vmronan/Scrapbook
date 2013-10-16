@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InternetImageView : UIImageView <NSURLConnectionDataDelegate>
+@interface InternetImageView : NSObject <NSURLConnectionDataDelegate>
 
 @property NSURLConnection *urlConnection;
 @property NSMutableData *webData;
 @property id target;
 @property SEL action;
 
-- (id)initWithURLFromString:(NSString *)url andFrame:(CGRect)frame;
+- (id)initWithURLFromString:(NSString *)url;
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;

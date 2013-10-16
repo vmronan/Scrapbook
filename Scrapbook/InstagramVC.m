@@ -150,11 +150,11 @@
     // Place image in imageview of correct size
     float imageRatio = image.size.height / image.size.width;
     float scaledImageHeight = screenWidth * imageRatio;
-    InternetImageView *photoView = [[InternetImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, scaledImageHeight)];
-    [photoView setImage:image];
+//    InternetImageView *photoView = [[InternetImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, scaledImageHeight)];
+//    [photoView setImage:image];
     
-    [[cell contentView] setTag:scaledImageHeight];
-    [[cell contentView] addSubview:photoView];
+//    [[cell contentView] setTag:scaledImageHeight];
+//    [[cell contentView] addSubview:photoView];
     
     return cell;
 }

@@ -36,7 +36,8 @@
 - (void)didPressSearch
 {    
     // Clear images already there
-    self.photoURLs = [[NSMutableArray alloc] initWithCapacity:0];
+    self.currentNumPhotos = 0;
+    self.photos = [[NSMutableArray alloc] initWithCapacity:0];
     
     // Dismiss keyboard if it's not already gone
     if([self.queryField isFirstResponder]) {
@@ -61,21 +62,27 @@
     if([[response objectForKey:@"stat"] isEqual:@"ok"]) {
         NSMutableArray *photos = [[response objectForKey:@"photos"] objectForKey:@"photo"];
         
-        for(int i = 0; i < [photos count]; i++) {
+        self.expectedNumPhotos = [photos count];
+        for(int i = 0; i < self.expectedNumPhotos; i++) {
             NSMutableDictionary *photo = [photos objectAtIndex:i];
             NSString *photoUrl = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@.jpg", [photo objectForKey:@"farm"], [photo objectForKey:@"server"], [photo objectForKey:@"id"], [photo objectForKey:@"secret"]];
-            [self.photoURLs addObject:photoUrl];
+            InternetImageView *download = [[InternetImageView alloc] initWithURLFromString:photoUrl];
+            download.target = self;
+            download.action = @selector(downloadFinished:);
         }
     }
-    
-    [self.tableView reloadData];
-    [self.loadingSpinner stopAnimating];
 }
 
 - (void)downloadFinished:(UIImage*)image
 {
-//    NSLog(@"download finished");
+    [self.photos addObject:image];
     NSLog(@"download finished. %f x %f", image.size.width, image.size.height);
+    self.currentNumPhotos++;
+    if(self.currentNumPhotos == self.expectedNumPhotos) {
+        NSLog(@"done downloading photos!");
+        [self.tableView reloadData];
+        [self.loadingSpinner stopAnimating];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
@@ -137,7 +144,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.photoURLs count];
+    return [self.photos count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,16 +156,17 @@
     }
     
     // Get image
+    UIImage *image = [self.photos objectAtIndex:indexPath.row];
     int screenWidth = self.view.bounds.size.width;
-    InternetImageView *photoView = [[InternetImageView alloc] initWithURLFromString:[self.photoURLs objectAtIndex:indexPath.row] andFrame:CGRectMake(0, 0, screenWidth, screenWidth)];
-    photoView.target = self;
-    photoView.action = @selector(downloadFinished:);
-    photoView.contentMode = UIViewContentModeScaleAspectFill;
-
-    // Place image in imageview of correct size
-//    float imageRatio = image.size.height / image.size.width;
-//    float scaledImageHeight = screenWidth * imageRatio;
+    float imageRatio = image.size.height / image.size.width;
+    float scaledImageHeight = screenWidth * imageRatio;
     
+    // Place image in imageview of correct size
+    UIImageView *photoView = [[UIImageView alloc] initWithImage:image];
+    [photoView setFrame:CGRectMake(0, 0, screenWidth, scaledImageHeight)];
+    photoView.contentMode = UIViewContentModeScaleAspectFit;
+
+    // Show imageview
     [[cell contentView] addSubview:photoView];
     
     return cell;
@@ -166,7 +174,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.view.bounds.size.width;
+    UIImage *image = [self.photos objectAtIndex:indexPath.row];
+    int screenWidth = self.view.bounds.size.width;
+    float imageRatio = image.size.height / image.size.width;
+    float scaledImageHeight = screenWidth * imageRatio;
+    return scaledImageHeight;
 }
 
 /*
@@ -218,9 +230,9 @@
     ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
-    ScrapbookItem *item = [[ScrapbookItem alloc] initWithURL:[self.photoURLs objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
-    [scrapbookItemCreateVC editItem:item];
-    scrapbookItemCreateVC.model = self.model;
+//    ScrapbookItem *item = [[ScrapbookItem alloc] initWithURL:[self.photoURLs objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
+//    [scrapbookItemCreateVC editItem:item];
+//    scrapbookItemCreateVC.model = self.model;
     
     // Push the view controller.
     [self.navigationController pushViewController:scrapbookItemCreateVC animated:YES]; 
