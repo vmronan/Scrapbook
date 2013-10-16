@@ -11,6 +11,6 @@
 
 @interface ScrapbookItemCellView : UIView
 
-- (id)initWithItem:(ScrapbookItem*)item;
+- (id)initWithItem:(ScrapbookItem*)item screenWidth:(int)screenWidth;
 
 @end

@@ -19,22 +19,33 @@
     return self;
 }
 
-- (id)initWithItem:(ScrapbookItem *)item
+- (id)initWithItem:(ScrapbookItem *)item screenWidth:(int)screenWidth
 {
     self = [super init];
     if (self) {
-        // Read image from documents folder and make imageview
+        // Read image from documents folder
         NSData *pngData = [NSData dataWithContentsOfFile:item.path];
         UIImage *image = [UIImage imageWithData:pngData];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
         
-        UITextView *titleView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 340, 30)];
+        // Show image at full width of screen
+        float imageRatio = image.size.height / image.size.width;
+        float scaledImageHeight = screenWidth * imageRatio;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth/2, scaledImageHeight/2)];
+        [imageView setImage:image];
+        
+        int titleHeight = 30;
+        UITextView *titleView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth/2, 0, screenWidth/2, titleHeight)];
         [titleView setText:item.title];
         [titleView setTextColor:[UIColor blackColor]];
         
+        UITextView *descriptionView = [[UITextView alloc] initWithFrame:CGRectMake(screenWidth/2, 30, screenWidth/2, scaledImageHeight-titleHeight)];
+        [descriptionView setText:item.description];
+        [descriptionView setTextColor:[UIColor grayColor]];
+        
         [self addSubview:imageView];
         [self addSubview:titleView];
-        [self setTag:imageView.bounds.size.height+30];
+        [self addSubview:descriptionView];
+        [self setTag:scaledImageHeight/2];
     }
     return self;
 }
