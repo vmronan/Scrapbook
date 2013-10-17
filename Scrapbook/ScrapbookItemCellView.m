@@ -23,6 +23,9 @@
 {
     self = [super init];
     if (self) {
+        
+        NSLog(@"screenwidth = %d", screenWidth);
+        NSLog(@"main width = %f", [UIScreen mainScreen].bounds.size.width);
         // Read image from documents folder
         NSData *pngData = [NSData dataWithContentsOfFile:item.path];
         UIImage *image = [UIImage imageWithData:pngData];
