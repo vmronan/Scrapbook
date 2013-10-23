@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PhotoTagSearcher.h"
 #import "ScrapbookItemEditVC.h"
-#import "InternetImageView.h"
+#import "InternetImageDownloader.h"
 
 @interface InstagramVC : UITableViewController
 

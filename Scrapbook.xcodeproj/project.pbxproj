@@ -10,6 +10,8 @@
 		9325719B180F351A0000B146 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9325719A180F351A0000B146 /* Images.xcassets */; };
 		932571A0180F36650000B146 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719E180F36650000B146 /* app_icon.png */; };
 		932571A1180F36650000B146 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719F180F36650000B146 /* app_icon@2x.png */; };
+		93275E981818984900829966 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93275E971818984900829966 /* Accounts.framework */; };
+		93275E9A1818985700829966 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93275E991818985700829966 /* Social.framework */; };
 		93863FB117FE854400402448 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 93863FB017FE854400402448 /* Database.m */; };
 		93863FB317FE867400402448 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 93863FB217FE867400402448 /* libsqlite3.dylib */; };
 		93863FB517FE910100402448 /* items.sql in Resources */ = {isa = PBXBuildFile; fileRef = 93863FB417FE910100402448 /* items.sql */; };
@@ -18,7 +20,7 @@
 		93916225180B4EFE008B270F /* flickr.png in Resources */ = {isa = PBXBuildFile; fileRef = 93916223180B4EFE008B270F /* flickr.png */; };
 		93916226180B4EFE008B270F /* flickr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93916224180B4EFE008B270F /* flickr@2x.png */; };
 		93916230180B9B6B008B270F /* ScrapbookItemCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9391622F180B9B6B008B270F /* ScrapbookItemCellView.m */; };
-		93916233180BC74E008B270F /* InternetImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93916232180BC74E008B270F /* InternetImageView.m */; };
+		93916233180BC74E008B270F /* InternetImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 93916232180BC74E008B270F /* InternetImageDownloader.m */; };
 		93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C87FC017F94BEF0070B7EB /* PhotoTagSearcher.m */; };
 		93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C87FC617F94F330070B7EB /* FlickrVC.m */; };
 		93C87FC917F94F330070B7EB /* FlickrVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C87FC717F94F330070B7EB /* FlickrVC.xib */; };
@@ -45,8 +47,10 @@
 
 /* Begin PBXFileReference section */
 		9325719A180F351A0000B146 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9325719E180F36650000B146 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = app_icon.png; path = Scrapbook/app_icon.png; sourceTree = "<group>"; };
-		9325719F180F36650000B146 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app_icon@2x.png"; path = "Scrapbook/app_icon@2x.png"; sourceTree = "<group>"; };
+		9325719E180F36650000B146 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
+		9325719F180F36650000B146 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon@2x.png"; sourceTree = "<group>"; };
+		93275E971818984900829966 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		93275E991818985700829966 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		93863FAF17FE854400402448 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		93863FB017FE854400402448 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		93863FB217FE867400402448 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -57,8 +61,8 @@
 		93916224180B4EFE008B270F /* flickr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flickr@2x.png"; sourceTree = "<group>"; };
 		9391622E180B9B6B008B270F /* ScrapbookItemCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrapbookItemCellView.h; sourceTree = "<group>"; };
 		9391622F180B9B6B008B270F /* ScrapbookItemCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookItemCellView.m; sourceTree = "<group>"; };
-		93916231180BC74E008B270F /* InternetImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternetImageView.h; sourceTree = "<group>"; };
-		93916232180BC74E008B270F /* InternetImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternetImageView.m; sourceTree = "<group>"; };
+		93916231180BC74E008B270F /* InternetImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InternetImageDownloader.h; sourceTree = "<group>"; };
+		93916232180BC74E008B270F /* InternetImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InternetImageDownloader.m; sourceTree = "<group>"; };
 		93C87FBF17F94BEF0070B7EB /* PhotoTagSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTagSearcher.h; sourceTree = "<group>"; };
 		93C87FC017F94BEF0070B7EB /* PhotoTagSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTagSearcher.m; sourceTree = "<group>"; };
 		93C87FC517F94F330070B7EB /* FlickrVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrVC.h; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93275E9A1818985700829966 /* Social.framework in Frameworks */,
+				93275E981818984900829966 /* Accounts.framework in Frameworks */,
 				93863FB317FE867400402448 /* libsqlite3.dylib in Frameworks */,
 				93C8A8CD17F7CBCF00C861C4 /* UIKit.framework in Frameworks */,
 				93C8A8CF17F7CBCF00C861C4 /* Foundation.framework in Frameworks */,
@@ -114,8 +120,6 @@
 		93C8A8C017F7CBCF00C861C4 = {
 			isa = PBXGroup;
 			children = (
-				9325719E180F36650000B146 /* app_icon.png */,
-				9325719F180F36650000B146 /* app_icon@2x.png */,
 				93C8A8D217F7CBCF00C861C4 /* Scrapbook */,
 				93C8A8CB17F7CBCF00C861C4 /* Frameworks */,
 				93C8A8CA17F7CBCF00C861C4 /* Products */,
@@ -133,6 +137,8 @@
 		93C8A8CB17F7CBCF00C861C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93275E991818985700829966 /* Social.framework */,
+				93275E971818984900829966 /* Accounts.framework */,
 				93863FB217FE867400402448 /* libsqlite3.dylib */,
 				93C8A8CC17F7CBCF00C861C4 /* UIKit.framework */,
 				93C8A8CE17F7CBCF00C861C4 /* Foundation.framework */,
@@ -144,12 +150,6 @@
 		93C8A8D217F7CBCF00C861C4 /* Scrapbook */ = {
 			isa = PBXGroup;
 			children = (
-				93916231180BC74E008B270F /* InternetImageView.h */,
-				93916232180BC74E008B270F /* InternetImageView.m */,
-				93916223180B4EFE008B270F /* flickr.png */,
-				93916224180B4EFE008B270F /* flickr@2x.png */,
-				9391621B180A3CDC008B270F /* instagram.png */,
-				9391621C180A3CDC008B270F /* instagram@2x.png */,
 				93C8A8DB17F7CBCF00C861C4 /* AppDelegate.h */,
 				93C8A8DC17F7CBCF00C861C4 /* AppDelegate.m */,
 				93C8A8FD17F7CDC100C861C4 /* ScrapbookVC.h */,
@@ -164,6 +164,8 @@
 				93C8A8FA17F7CD6400C861C4 /* ScrapbookItemDetailVC.xib */,
 				93C8A90017F7CE1700C861C4 /* PhotoSearchVC.h */,
 				93C8A90117F7CE1700C861C4 /* PhotoSearchVC.m */,
+				93916231180BC74E008B270F /* InternetImageDownloader.h */,
+				93916232180BC74E008B270F /* InternetImageDownloader.m */,
 				93C87FBF17F94BEF0070B7EB /* PhotoTagSearcher.h */,
 				93C87FC017F94BEF0070B7EB /* PhotoTagSearcher.m */,
 				93C87FC517F94F330070B7EB /* FlickrVC.h */,
@@ -187,6 +189,12 @@
 		93C8A8D317F7CBCF00C861C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9325719E180F36650000B146 /* app_icon.png */,
+				9325719F180F36650000B146 /* app_icon@2x.png */,
+				93916223180B4EFE008B270F /* flickr.png */,
+				93916224180B4EFE008B270F /* flickr@2x.png */,
+				9391621B180A3CDC008B270F /* instagram.png */,
+				9391621C180A3CDC008B270F /* instagram@2x.png */,
 				93863FB417FE910100402448 /* items.sql */,
 				93C8A8D417F7CBCF00C861C4 /* Scrapbook-Info.plist */,
 				93C8A8D517F7CBCF00C861C4 /* InfoPlist.strings */,
@@ -283,7 +291,7 @@
 				93C8A8FB17F7CD6400C861C4 /* ScrapbookItemDetailVC.m in Sources */,
 				93C8A8FF17F7CDC100C861C4 /* ScrapbookVC.m in Sources */,
 				93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */,
-				93916233180BC74E008B270F /* InternetImageView.m in Sources */,
+				93916233180BC74E008B270F /* InternetImageDownloader.m in Sources */,
 				93C8A90217F7CE1700C861C4 /* PhotoSearchVC.m in Sources */,
 				93C87FCD17F94F5C0070B7EB /* InstagramVC.m in Sources */,
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,

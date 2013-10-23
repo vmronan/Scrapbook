@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InternetImageView : NSObject <NSURLConnectionDataDelegate>
+@interface InternetImageDownloader : NSObject <NSURLConnectionDataDelegate>
 
 @property NSURLConnection *urlConnection;
 @property NSMutableData *webData;

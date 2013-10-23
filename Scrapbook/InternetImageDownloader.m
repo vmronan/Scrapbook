@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Vanessa Ronan. All rights reserved.
 //
 
-#import "InternetImageView.h"
+#import "InternetImageDownloader.h"
 
-@implementation InternetImageView
+@implementation InternetImageDownloader
 
 //- (id)initWithFrame:(CGRect)frame
 //{

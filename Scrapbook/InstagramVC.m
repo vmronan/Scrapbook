@@ -64,7 +64,7 @@
     for(int i = 0; i < self.expectedNumPhotos; i++) {
         NSMutableDictionary *photo = [photos objectAtIndex:i];
         NSString *photoUrl = [[[photo objectForKey:@"images"] objectForKey:@"low_resolution"] objectForKey:@"url"];
-        InternetImageView *download = [[InternetImageView alloc] initWithURLFromString:photoUrl];
+        InternetImageDownloader *download = [[InternetImageDownloader alloc] initWithURLFromString:photoUrl];
         download.target = self;
         download.action = @selector(downloadFinished:);
     }

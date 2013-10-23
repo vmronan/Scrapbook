@@ -50,40 +50,54 @@
     NSData *pngData = [NSData dataWithContentsOfFile:self.item.path];
     UIImage *image = [UIImage imageWithData:pngData];
     
-    // Show image at full width of screen
+    // Show image with height of the screen's width
     int screenWidth = self.view.bounds.size.width;
-    float imageRatio = image.size.height / image.size.width;
-    float scaledImageHeight = screenWidth * imageRatio;
-    float scaledImageWidth = screenWidth;
-    if(scaledImageHeight >= self.view.bounds.size.height - 150) {
-        scaledImageHeight = scaledImageHeight-66;
-        scaledImageWidth = scaledImageHeight/imageRatio;
-    }
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-scaledImageWidth)/2, 0, scaledImageWidth, scaledImageHeight)];
+    float scaledImageWidth = image.size.width / image.size.height * screenWidth;
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-scaledImageWidth)/2, 0, scaledImageWidth, screenWidth)];
     [imageView setImage:image];
     [self.view addSubview:imageView];
     
     // Show title below image
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, scaledImageHeight, screenWidth, 30)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, screenWidth, screenWidth, 30)];
     title.text = self.item.title;
     title.textAlignment = NSTextAlignmentCenter;
     title.textColor = [UIColor blackColor];
     [self.view addSubview:title];
     
     // Show description below title
-    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 26+scaledImageHeight, screenWidth, 30)];
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 26+screenWidth, screenWidth, 30)];
     description.text = self.item.description;
     description.font = [UIFont systemFontOfSize:14];
     description.textAlignment = NSTextAlignmentCenter;
     description.textColor = [UIColor grayColor];
     [self.view addSubview:description];
+    
+    // Show Twitter posting button below description
+    UIButton *postButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [postButton setTitle:@"Post to Twitter" forState:UIControlStateNormal];
+    [postButton setFrame:CGRectMake(10, screenWidth+60, 300, 30)];
+    [postButton addTarget:self action:@selector(presentPostComposer) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:postButton];
+}
+
+- (void)presentPostComposer
+{
+    SLComposeViewController *composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [composeViewController setInitialText:[NSString stringWithFormat:@"%@ - %@", self.item.title, self.item.description]];
+    [composeViewController addImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:self.item.path]]];
+    [self presentViewController:composeViewController animated:YES completion:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)didReceiveMemoryWarning
