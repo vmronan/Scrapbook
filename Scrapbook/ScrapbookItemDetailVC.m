@@ -31,7 +31,7 @@
 - (void)editButtonPressed
 {
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
+    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
     [scrapbookItemCreateVC editItem:self.item];

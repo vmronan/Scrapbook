@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ScrapbookModel.h"
+#import "PhotoCropVC.h"
 
 @interface ScrapbookItemEditVC : UIViewController
 
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *titleField;
 @property (strong, nonatomic) IBOutlet UITextField *descriptionField;
 
+- (IBAction)cropButtonPressed:(id)sender;
 - (void)editItem:(ScrapbookItem*)item;
 - (void)editPhotoAtPath:(NSString*)path;
 - (void)showPhotoAtPath:(NSString*)path;
