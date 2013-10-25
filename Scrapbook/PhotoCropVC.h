@@ -14,6 +14,9 @@
 @property (strong, nonatomic) UIImageView *imageView;
 @property CropRegionView *cropRegionView;
 
+- (void)doneButtonPressed;
 - (void)showPhotoAtPath:(NSString *)path;
+- (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight;
+- (void)showCropRegion;
 
 @end

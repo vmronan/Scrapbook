@@ -31,6 +31,33 @@
     return self;
 }
 
+- (void)doneButtonPressed
+{
+    // Crop image
+    UIImage *croppedImage = [self getCroppedImage];
+    
+    // Save image
+    // ******
+}
+
+- (UIImage *)getCroppedImage
+{
+    // Get temporary UIImage of pixels in crop region from the original image
+    CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.imageView.image.CGImage, [self.cropRegionView cropBounds]);
+    UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
+    
+    // Draw UIImage with the new dimensions in the image context
+    UIGraphicsBeginImageContext(CGSizeMake(320.0, 320.0));
+    [temp drawInRect:CGRectMake(0, 0, 320, 320)];
+    UIImage *croppedUIImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the graphics context and release the CGImage
+    UIGraphicsEndImageContext();
+    CGImageRelease(croppedCGImage);
+    
+    return croppedUIImage;
+}
+
 - (void)showPhotoAtPath:(NSString *)path
 {
     // Read image from documents folder
