@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *titleField;
 @property (strong, nonatomic) IBOutlet UITextField *descriptionField;
 
+- (void)saveItem;
 - (IBAction)cropButtonPressed:(id)sender;
 - (void)editItem:(ScrapbookItem*)item;
 - (void)editPhotoAtPath:(NSString*)path;

@@ -37,6 +37,8 @@
 
 - (IBAction)cropButtonPressed:(id)sender
 {
+    [self saveItem];
+    
     // Go to crop view
     PhotoEditVC *photoCropVC = [[PhotoEditVC alloc] init];
     photoCropVC.model = self.model;
@@ -47,14 +49,20 @@
 
 - (void)saveButtonPressed
 {
-    self.item.title = self.titleField.text;
-    self.item.description = self.descriptionField.text;
-    [self.model saveItem:self.item];
+    [self saveItem];
     
+    // Go to main scrapbook view
     ScrapbookVC *scrapbookVC = [[ScrapbookVC alloc] init];
     scrapbookVC.model = self.model;
     [scrapbookVC update];
     [self.navigationController pushViewController:scrapbookVC animated:YES];
+}
+
+- (void)saveItem
+{
+    self.item.title = self.titleField.text;
+    self.item.description = self.descriptionField.text;
+    [self.model saveItem:self.item];
 }
 
 - (void)editItem:(ScrapbookItem*)item
