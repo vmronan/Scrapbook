@@ -36,7 +36,6 @@
 - (void)didPressSearch
 {
     // Clear images already there
-    self.currentNumPhotos = 0;
     self.photos = [[NSMutableArray alloc] initWithCapacity:0];
     
     // Dismiss keyboard if it's not already gone
@@ -60,8 +59,7 @@
 {
     NSMutableArray *photos = [response objectForKey:@"data"];
     
-    self.expectedNumPhotos = [photos count];
-    for(int i = 0; i < self.expectedNumPhotos; i++) {
+    for(int i = 0; i < [photos count]; i++) {
         NSMutableDictionary *photo = [photos objectAtIndex:i];
         NSString *photoUrl = [[[photo objectForKey:@"images"] objectForKey:@"low_resolution"] objectForKey:@"url"];
         InternetImageDownloader *download = [[InternetImageDownloader alloc] initWithURLFromString:photoUrl];
@@ -73,12 +71,8 @@
 - (void)downloadFinished:(UIImage*)image
 {
     [self.photos addObject:image];
-    self.currentNumPhotos++;
-    if(self.currentNumPhotos == self.expectedNumPhotos) {
-        NSLog(@"done downloading photos!");
-        [self.tableView reloadData];
-        [self.loadingSpinner stopAnimating];
-    }
+    [self.tableView reloadData];
+    [self.loadingSpinner stopAnimating];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;

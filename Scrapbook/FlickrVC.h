@@ -21,9 +21,6 @@
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) NSMutableArray *photos;
 
-@property int expectedNumPhotos;
-@property int currentNumPhotos;
-
 @property (strong, nonatomic) UITabBar *tabBar;
 
 + (UIColor*)flickrPink;
