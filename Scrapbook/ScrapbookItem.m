@@ -20,7 +20,6 @@
         NSString* origPath = [LocalPhotoSaver saveOrigImage:image];   // *** here it will save the image to a path, then save the path
         self.origPath = origPath;
         self.currentPath = origPath;
-        NSLog(@"created image at path %@", self.origPath);
         self.title = title;
         self.description = description;
     }

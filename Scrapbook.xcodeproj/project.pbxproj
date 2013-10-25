@@ -14,7 +14,7 @@
 		93275E9A1818985700829966 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93275E991818985700829966 /* Social.framework */; };
 		93275E9C181A1A6500829966 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9B181A1A6500829966 /* edit.png */; };
 		93275E9E181A1ABD00829966 /* crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9D181A1ABD00829966 /* crop.png */; };
-		93275EA1181A1BA400829966 /* PhotoCropVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA0181A1BA400829966 /* PhotoCropVC.m */; };
+		93275EA1181A1BA400829966 /* PhotoEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA0181A1BA400829966 /* PhotoEditVC.m */; };
 		93275EAA181A23A500829966 /* CropRegionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA9181A23A500829966 /* CropRegionView.m */; };
 		93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EAC181A478F00829966 /* LocalPhotoSaver.m */; };
 		93863FB117FE854400402448 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 93863FB017FE854400402448 /* Database.m */; };
@@ -48,6 +48,7 @@
 		93C8A90217F7CE1700C861C4 /* PhotoSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A90117F7CE1700C861C4 /* PhotoSearchVC.m */; };
 		93C8A90517F7D46700C861C4 /* ScrapbookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A90417F7D46700C861C4 /* ScrapbookItem.m */; };
 		93C8A90817F7D48A00C861C4 /* ScrapbookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A90717F7D48A00C861C4 /* ScrapbookModel.m */; };
+		93DDB1F2181A51740063A65A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DDB1F1181A51740063A65A /* CoreImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +59,8 @@
 		93275E991818985700829966 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		93275E9B181A1A6500829966 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		93275E9D181A1ABD00829966 /* crop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crop.png; sourceTree = "<group>"; };
-		93275E9F181A1BA400829966 /* PhotoCropVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCropVC.h; sourceTree = "<group>"; };
-		93275EA0181A1BA400829966 /* PhotoCropVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCropVC.m; sourceTree = "<group>"; };
+		93275E9F181A1BA400829966 /* PhotoEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditVC.h; sourceTree = "<group>"; };
+		93275EA0181A1BA400829966 /* PhotoEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditVC.m; sourceTree = "<group>"; };
 		93275EA8181A23A500829966 /* CropRegionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionView.h; sourceTree = "<group>"; };
 		93275EA9181A23A500829966 /* CropRegionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionView.m; sourceTree = "<group>"; };
 		93275EAB181A478F00829966 /* LocalPhotoSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPhotoSaver.h; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		93C8A90417F7D46700C861C4 /* ScrapbookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookItem.m; sourceTree = "<group>"; };
 		93C8A90617F7D48A00C861C4 /* ScrapbookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrapbookModel.h; sourceTree = "<group>"; };
 		93C8A90717F7D48A00C861C4 /* ScrapbookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookModel.m; sourceTree = "<group>"; };
+		93DDB1F1181A51740063A65A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,12 +120,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93DDB1F2181A51740063A65A /* CoreImage.framework in Frameworks */,
+				93C8A8D117F7CBCF00C861C4 /* CoreGraphics.framework in Frameworks */,
+				93C8A8CD17F7CBCF00C861C4 /* UIKit.framework in Frameworks */,
+				93C8A8CF17F7CBCF00C861C4 /* Foundation.framework in Frameworks */,
 				93275E9A1818985700829966 /* Social.framework in Frameworks */,
 				93275E981818984900829966 /* Accounts.framework in Frameworks */,
 				93863FB317FE867400402448 /* libsqlite3.dylib in Frameworks */,
-				93C8A8CD17F7CBCF00C861C4 /* UIKit.framework in Frameworks */,
-				93C8A8CF17F7CBCF00C861C4 /* Foundation.framework in Frameworks */,
-				93C8A8D117F7CBCF00C861C4 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +139,10 @@
 				93C8A8F317F7CD5C00C861C4 /* ScrapbookItemEditVC.h */,
 				93C8A8F417F7CD5C00C861C4 /* ScrapbookItemEditVC.m */,
 				93C8A8F517F7CD5D00C861C4 /* ScrapbookItemEditVC.xib */,
-				93275EA7181A238A00829966 /* Crop */,
+				93275E9F181A1BA400829966 /* PhotoEditVC.h */,
+				93275EA0181A1BA400829966 /* PhotoEditVC.m */,
+				93275EA8181A23A500829966 /* CropRegionView.h */,
+				93275EA9181A23A500829966 /* CropRegionView.m */,
 			);
 			name = "Scrapbook Item Edit";
 			sourceTree = "<group>";
@@ -197,17 +203,6 @@
 			name = "Scrapbook View";
 			sourceTree = "<group>";
 		};
-		93275EA7181A238A00829966 /* Crop */ = {
-			isa = PBXGroup;
-			children = (
-				93275E9F181A1BA400829966 /* PhotoCropVC.h */,
-				93275EA0181A1BA400829966 /* PhotoCropVC.m */,
-				93275EA8181A23A500829966 /* CropRegionView.h */,
-				93275EA9181A23A500829966 /* CropRegionView.m */,
-			);
-			name = Crop;
-			sourceTree = "<group>";
-		};
 		93C8A8C017F7CBCF00C861C4 = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +223,7 @@
 		93C8A8CB17F7CBCF00C861C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93DDB1F1181A51740063A65A /* CoreImage.framework */,
 				93275E991818985700829966 /* Social.framework */,
 				93275E971818984900829966 /* Accounts.framework */,
 				93863FB217FE867400402448 /* libsqlite3.dylib */,
@@ -364,7 +360,7 @@
 				93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */,
 				93916233180BC74E008B270F /* InternetImageDownloader.m in Sources */,
 				93C8A90217F7CE1700C861C4 /* PhotoSearchVC.m in Sources */,
-				93275EA1181A1BA400829966 /* PhotoCropVC.m in Sources */,
+				93275EA1181A1BA400829966 /* PhotoEditVC.m in Sources */,
 				93C87FCD17F94F5C0070B7EB /* InstagramVC.m in Sources */,
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,
 				93C8A90517F7D46700C861C4 /* ScrapbookItem.m in Sources */,

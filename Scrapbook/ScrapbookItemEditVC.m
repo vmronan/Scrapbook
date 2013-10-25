@@ -38,7 +38,7 @@
 - (IBAction)cropButtonPressed:(id)sender
 {
     // Go to crop view
-    PhotoCropVC *photoCropVC = [[PhotoCropVC alloc] init];
+    PhotoEditVC *photoCropVC = [[PhotoEditVC alloc] init];
     photoCropVC.model = self.model;
     photoCropVC.item = self.item;
     [photoCropVC showOrigPhoto];       // show original photo to crop
