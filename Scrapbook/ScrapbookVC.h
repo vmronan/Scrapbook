@@ -17,8 +17,11 @@
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) PhotoSearchVC *photoSearchVC;
 @property (strong, nonatomic) ScrapbookItemDetailVC *scrapbookItemDetailVC;
+@property UIImagePickerController *imagePickerVC;
 
-- (void)addButtonPressed;
+- (void)searchButtonPressed;
+- (void)presentImagePickerView;
+
 - (void)update;
 
 @end

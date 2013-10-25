@@ -49,6 +49,8 @@
 		93C8A90517F7D46700C861C4 /* ScrapbookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A90417F7D46700C861C4 /* ScrapbookItem.m */; };
 		93C8A90817F7D48A00C861C4 /* ScrapbookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A90717F7D48A00C861C4 /* ScrapbookModel.m */; };
 		93DDB1F2181A51740063A65A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DDB1F1181A51740063A65A /* CoreImage.framework */; };
+		93DDB1F4181A5E630063A65A /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DDB1F3181A5E630063A65A /* search.png */; };
+		93DDB1F6181A60AB0063A65A /* gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DDB1F5181A60AB0063A65A /* gallery.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +115,8 @@
 		93C8A90617F7D48A00C861C4 /* ScrapbookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrapbookModel.h; sourceTree = "<group>"; };
 		93C8A90717F7D48A00C861C4 /* ScrapbookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookModel.m; sourceTree = "<group>"; };
 		93DDB1F1181A51740063A65A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		93DDB1F3181A5E630063A65A /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		93DDB1F5181A60AB0063A65A /* gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +166,6 @@
 				93C87FCA17F94F5C0070B7EB /* InstagramVC.h */,
 				93C87FCB17F94F5C0070B7EB /* InstagramVC.m */,
 				93C87FCC17F94F5C0070B7EB /* InstagramVC.xib */,
-				93275EA4181A1C1000829966 /* Data */,
 			);
 			name = "Photo Search";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				93275EA5181A1C2900829966 /* Scrapbook Item View */,
 				93275EA2181A1BCB00829966 /* Scrapbook Item Edit */,
 				93275EA3181A1BF800829966 /* Photo Search */,
+				93275EA4181A1C1000829966 /* Data */,
 				93C8A8D317F7CBCF00C861C4 /* Supporting Files */,
 				9325719A180F351A0000B146 /* Images.xcassets */,
 			);
@@ -252,6 +256,8 @@
 		93C8A8D317F7CBCF00C861C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				93DDB1F5181A60AB0063A65A /* gallery.png */,
+				93DDB1F3181A5E630063A65A /* search.png */,
 				93275E9D181A1ABD00829966 /* crop.png */,
 				93275E9B181A1A6500829966 /* edit.png */,
 				9325719E180F36650000B146 /* app_icon.png */,
@@ -325,11 +331,13 @@
 			files = (
 				93916225180B4EFE008B270F /* flickr.png in Resources */,
 				93C8A8D717F7CBCF00C861C4 /* InfoPlist.strings in Resources */,
+				93DDB1F6181A60AB0063A65A /* gallery.png in Resources */,
 				93C87FC917F94F330070B7EB /* FlickrVC.xib in Resources */,
 				932571A0180F36650000B146 /* app_icon.png in Resources */,
 				93C8A8DF17F7CBCF00C861C4 /* Default.png in Resources */,
 				932571A1180F36650000B146 /* app_icon@2x.png in Resources */,
 				93C8A8E117F7CBCF00C861C4 /* Default@2x.png in Resources */,
+				93DDB1F4181A5E630063A65A /* search.png in Resources */,
 				93863FB517FE910100402448 /* items.sql in Resources */,
 				9391621D180A3CDC008B270F /* instagram.png in Resources */,
 				9391621E180A3CDC008B270F /* instagram@2x.png in Resources */,

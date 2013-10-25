@@ -23,9 +23,13 @@
         
         self.items = [self.model allItems];
         
-        // Make add button in navigation bar
-        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonPressed)];
-        [self.navigationItem setRightBarButtonItem:addButton animated:NO];
+        self.imagePickerVC = [[UIImagePickerController alloc] init];
+        [self.imagePickerVC setDelegate:self];
+        
+        // Make search and gallery buttons in navigation bar
+        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonPressed)];
+        UIBarButtonItem *galleryButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gallery.png"] style:UIBarButtonItemStylePlain target:self action:@selector(presentImagePickerView)];
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:addButton, galleryButton, nil]];
         
         // Register the type of view to create for a table cell
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
@@ -33,11 +37,31 @@
     return self;
 }
 
-- (void)addButtonPressed
+- (void)searchButtonPressed
 {
     // Go to view that lets you search for photos on Flickr and Instagram
     self.photoSearchVC = [[PhotoSearchVC alloc] initWithModel:self.model];
     [self.navigationController pushViewController:self.photoSearchVC animated:YES];
+}
+
+- (void)presentImagePickerView
+{
+    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self.imagePickerVC dismissViewControllerAnimated:YES completion:nil];
+    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"] title:nil description:nil rowId:-1];
+    [scrapbookItemEditVC editItem:item];
+    scrapbookItemEditVC.model = self.model;
+    [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self.imagePickerVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)update
