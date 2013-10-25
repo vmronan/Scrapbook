@@ -24,7 +24,7 @@
     self = [super init];
     if (self) {
         // Read image from documents folder
-        NSData *pngData = [NSData dataWithContentsOfFile:item.path];
+        NSData *pngData = [NSData dataWithContentsOfFile:item.currentPath];
         UIImage *image = [UIImage imageWithData:pngData];
         
         // Show image at full width of screen

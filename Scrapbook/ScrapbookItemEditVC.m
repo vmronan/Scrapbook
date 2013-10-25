@@ -40,7 +40,7 @@
 - (IBAction)cropButtonPressed:(id)sender
 {
     PhotoCropVC *photoCropVC = [[PhotoCropVC alloc] init];
-    [photoCropVC showPhotoAtPath:self.item.path];
+    [photoCropVC showPhotoAtPath:self.item.origPath];       // show original photo to crop
     [self.navigationController pushViewController:photoCropVC animated:YES];
 }
 
@@ -59,7 +59,7 @@
 - (void)editItem:(ScrapbookItem*)item
 {
     self.item = item;
-    [self showPhotoAtPath:item.path];
+    [self showPhotoAtPath:item.currentPath];
 }
 
 - (void)showPhotoAtPath:(NSString *)path

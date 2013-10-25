@@ -10,25 +10,31 @@
 
 @implementation ScrapbookItem
 
+// Called by Flickr and Instagram view controllers to create an object from the image selected.
+// Impossible for image to be edited at this point.
 - (id)initWithImage:(UIImage*)image title:(NSString*)title description:(NSString *)description rowId:(int)rowId
 {
     self = [super init];
     if(self) {
         self.rowId = rowId;
-        self.path = [self saveImage:image]; // *** here it will save the image to a path, then save the path
-        NSLog(@"created image at path %@", self.path);
+        NSString* origPath = [self saveImage:image];   // *** here it will save the image to a path, then save the path
+        self.origPath = origPath;
+        self.currentPath = origPath;
+        NSLog(@"created image at path %@", self.origPath);
         self.title = title;
         self.description = description;
     }
     return self;
 }
 
-- (id)initWithPath:(NSString *)path title:(NSString *)title description:(NSString *)description rowId:(int)rowId
+// Called by the database to create a new object from data in the database
+- (id)initWithOrigPath:(NSString *)origPath currentPath:(NSString* )currentPath title:(NSString *)title description:(NSString *)description rowId:(int)rowId
 {
     self = [super init];
     if(self) {
         self.rowId = rowId;
-        self.path = path;
+        self.origPath = origPath;
+        self.currentPath = currentPath;
         self.title = title;
         self.description = description;
     }

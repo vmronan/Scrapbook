@@ -14,10 +14,11 @@
 
 + (void)createEditableCopyOfDatabaseIfNeeded;
 + (void)initDatabase;
-+ (NSMutableArray *)fetchAllItems;
-+ (void)saveScrapbookItemWithPath:(NSString *)path title:(NSString*)title description:(NSString*)description;
-+ (void)updateScrapbookItemWithPath:(NSString *)path title:(NSString *)title description:(NSString *)description atRow:(int)rowId;
-+ (void)deleteScrapbookItem:(int)rowid;
 + (void)cleanUpDatabaseForQuit;
+
++ (NSMutableArray *)fetchAllItems;
++ (void)saveNewScrapbookItemWithOrigPath:(NSString *)origPath currentPath:(NSString *)currentPath title:(NSString*)title description:(NSString*)description;
++ (void)updateScrapbookItemWithOrigPath:(NSString *)origPath currentPath:(NSString *)currentPath title:(NSString *)title description:(NSString *)description atRow:(int)rowId;
++ (void)deleteScrapbookItem:(int)rowid;
 
 @end
