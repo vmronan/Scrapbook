@@ -31,7 +31,7 @@
 - (void)editButtonPressed
 {
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemCreateVC" bundle:nil];
+    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
     [scrapbookItemCreateVC editItem:self.item];
@@ -47,7 +47,7 @@
     self.item = [self.model itemAtIndex:index];
     
     // Read image from documents folder
-    NSData *pngData = [NSData dataWithContentsOfFile:self.item.path];
+    NSData *pngData = [NSData dataWithContentsOfFile:self.item.currentPath];
     UIImage *image = [UIImage imageWithData:pngData];
     
     // Show image with height of the screen's width
@@ -84,7 +84,7 @@
 {
     SLComposeViewController *composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     [composeViewController setInitialText:[NSString stringWithFormat:@"%@ - %@", self.item.title, self.item.description]];
-    [composeViewController addImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:self.item.path]]];
+    [composeViewController addImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:self.item.currentPath]]];
     [self presentViewController:composeViewController animated:YES completion:nil];
 }
 

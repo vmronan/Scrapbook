@@ -42,11 +42,11 @@ static sqlite3_stmt *deleteItem;
 
 + (void)initDatabase {
     // Create the statement strings
-    const char *createItemsTableString = "CREATE TABLE IF NOT EXISTS items (rowid INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, title TEXT, description TEXT)";
+    const char *createItemsTableString = "CREATE TABLE IF NOT EXISTS items (rowid INTEGER PRIMARY KEY AUTOINCREMENT, origPath TEXT, currentPath TEXT, title TEXT, description TEXT)";
     const char *fetchItemString = "SELECT * FROM items WHERE rowid=?";
     const char *fetchItemsString = "SELECT * FROM items";
-    const char *insertItemString = "INSERT INTO items (path, title, description) VALUES (?, ?, ?)";
-    const char *updateItemString = "UPDATE items SET path=?, title=?, description=? WHERE rowid=?";
+    const char *insertItemString = "INSERT INTO items (origPath, currentPath, title, description) VALUES (?, ?, ?, ?)";
+    const char *updateItemString = "UPDATE items SET origPath=?, currentPath=?, title=?, description=? WHERE rowid=?";
     const char *deleteItemString = "DELETE FROM items WHERE rowid=?";
     
     // Create the path to the database
@@ -111,16 +111,18 @@ static sqlite3_stmt *deleteItem;
     }
     
     // query columns from fetch statement
-    char *pathChars = (char *) sqlite3_column_text(fetchItems, 1);
-    char *titleChars = (char *) sqlite3_column_text(fetchItems, 2);
-    char *descriptionChars = (char *) sqlite3_column_text(fetchItems, 3);
+    char *origPathChars = (char *) sqlite3_column_text(fetchItems, 1);
+    char *currentPathChars = (char *) sqlite3_column_text(fetchItems, 2);
+    char *titleChars = (char *) sqlite3_column_text(fetchItems, 3);
+    char *descriptionChars = (char *) sqlite3_column_text(fetchItems, 4);
     // convert to NSStrings
-    NSString *tempPath = [NSString stringWithUTF8String:pathChars];
+    NSString *tempOrigPath = [NSString stringWithUTF8String:origPathChars];
+    NSString *tempCurrentPath = [NSString stringWithUTF8String:currentPathChars];
     NSString *tempTitle = [NSString stringWithUTF8String:titleChars];
     NSString *tempDescription = [NSString stringWithUTF8String:descriptionChars];
     
     //create ScrapbookItem object, notice the query for the row id
-    return [[ScrapbookItem alloc] initWithPath:tempPath title:tempTitle description:tempDescription rowId:sqlite3_column_int(fetchItems, 0)];
+    return [[ScrapbookItem alloc] initWithOrigPath:tempOrigPath currentPath:tempCurrentPath title:tempTitle description:tempDescription rowId:sqlite3_column_int(fetchItems, 0)];
 }
 
 + (NSMutableArray *)fetchAllItems
@@ -130,16 +132,18 @@ static sqlite3_stmt *deleteItem;
     while (sqlite3_step(fetchItems) == SQLITE_ROW) {
         
         // query columns from fetch statement
-        char *pathChars = (char *) sqlite3_column_text(fetchItems, 1);
-        char *titleChars = (char *) sqlite3_column_text(fetchItems, 2);
-        char *descriptionChars = (char *) sqlite3_column_text(fetchItems, 3);
+        char *origPathChars = (char *) sqlite3_column_text(fetchItems, 1);
+        char *currentPathChars = (char *) sqlite3_column_text(fetchItems, 2);
+        char *titleChars = (char *) sqlite3_column_text(fetchItems, 3);
+        char *descriptionChars = (char *) sqlite3_column_text(fetchItems, 4);
         // convert to NSStrings
-        NSString *tempPath = [NSString stringWithUTF8String:pathChars];
+        NSString *tempOrigPath = [NSString stringWithUTF8String:origPathChars];
+        NSString *tempCurrentPath = [NSString stringWithUTF8String:currentPathChars];
         NSString *tempTitle = [NSString stringWithUTF8String:titleChars];
         NSString *tempDescription = [NSString stringWithUTF8String:descriptionChars];
         
         //create ScrapbookItem object, notice the query for the row id
-        ScrapbookItem *item = [[ScrapbookItem alloc] initWithPath:tempPath title:tempTitle description:tempDescription rowId:sqlite3_column_int(fetchItems, 0)];
+        ScrapbookItem *item = [[ScrapbookItem alloc] initWithOrigPath:tempOrigPath currentPath:tempCurrentPath title:tempTitle description:tempDescription rowId:sqlite3_column_int(fetchItems, 0)];
         [items addObject:item];
     }
     
@@ -147,13 +151,13 @@ static sqlite3_stmt *deleteItem;
     return items;
 }
 
-+ (void)saveScrapbookItemWithPath:(NSString *)path title:(NSString*)title description:(NSString*)description;
++ (void)saveNewScrapbookItemWithOrigPath:(NSString *)origPath currentPath:(NSString *)currentPath title:(NSString*)title description:(NSString*)description
 {
     // Bind data to the statement
-    sqlite3_bind_text(insertItem, 1, [path UTF8String], -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(insertItem, 2, [title UTF8String], -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(insertItem, 3, [description UTF8String], -1, SQLITE_TRANSIENT);
-    
+    sqlite3_bind_text(insertItem, 1, [origPath UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(insertItem, 2, [currentPath UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(insertItem, 3, [title UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(insertItem, 4, [description UTF8String], -1, SQLITE_TRANSIENT);
     int success = sqlite3_step(insertItem);
     sqlite3_reset(insertItem);
     if (success != SQLITE_DONE) {
@@ -161,13 +165,14 @@ static sqlite3_stmt *deleteItem;
     }
 }
 
-+ (void)updateScrapbookItemWithPath:(NSString *)path title:(NSString *)title description:(NSString *)description atRow:(int)rowId
++ (void)updateScrapbookItemWithOrigPath:(NSString *)origPath currentPath:(NSString *)currentPath title:(NSString *)title description:(NSString *)description atRow:(int)rowId
 {
     // Bind data to the statement
-    sqlite3_bind_text(updateItem, 1, [path UTF8String], -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(updateItem, 2, [title UTF8String], -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(updateItem, 3, [description UTF8String], -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int(updateItem, 4, rowId);
+    sqlite3_bind_text(updateItem, 1, [origPath UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(updateItem, 2, [currentPath UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(updateItem, 3, [title UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(updateItem, 4, [description UTF8String], -1, SQLITE_TRANSIENT);
+    sqlite3_bind_int(updateItem, 5, rowId);
     
     // Step and reset statement, check for error
     int success = sqlite3_step(updateItem);
