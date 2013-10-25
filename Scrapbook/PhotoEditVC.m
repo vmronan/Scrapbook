@@ -6,21 +6,23 @@
 //  Copyright (c) 2013 Vanessa Ronan. All rights reserved.
 //
 
-#import "PhotoCropVC.h"
+#import "PhotoEditVC.h"
 
-@interface PhotoCropVC ()
+@interface PhotoEditVC ()
 
 @end
 
-@implementation PhotoCropVC
+@implementation PhotoEditVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self.navigationItem setTitle:@"Crop photo"];
+        [self.navigationItem setTitle:@"Edit photo"];
         [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        [self showFilterButtons];
         
         // Make done button in navigation bar
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
@@ -44,6 +46,30 @@
     
     // Push the view controller.
     [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
+}
+
+- (void)showFilterButtons
+{
+    int screenWidth = self.view.bounds.size.width;
+    int screenHeight = self.view.bounds.size.height;
+    
+    self.vignetteButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.vignetteButton setFrame:CGRectMake(0, screenHeight-94, screenWidth/3, 30)];
+    [self.vignetteButton setTitle:@"Vignette" forState:UIControlStateNormal];
+    [self.vignetteButton addTarget:self action:@selector(applyVignetteFilter) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.vignetteButton];
+    
+    self.chromeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.chromeButton setFrame:CGRectMake(screenWidth/3, screenHeight-94, screenWidth/3, 30)];
+    [self.chromeButton setTitle:@"Chrome" forState:UIControlStateNormal];
+    [self.chromeButton addTarget:self action:@selector(applyChromeFilter) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.chromeButton];
+    
+    self.posterizeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.posterizeButton setFrame:CGRectMake(screenWidth*2/3, screenHeight-94, screenWidth/3, 30)];
+    [self.posterizeButton setTitle:@"Posterize" forState:UIControlStateNormal];
+    [self.posterizeButton addTarget:self action:@selector(applyPosterizeFilter) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.posterizeButton];
 }
 
 - (UIImage *)getCroppedImage
@@ -75,7 +101,7 @@
     int screenHeight = self.view.bounds.size.height-64;
     
     // Show image of correct size in image view
-    self.imageView = [self setImageViewForImage:image withMaxWidth:screenWidth maxHeight:screenHeight];
+    self.imageView = [self setImageViewForImage:image withMaxWidth:screenWidth maxHeight:screenHeight-30];
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [self.imageView setImage:image];
     [self.view addSubview:self.imageView];
@@ -103,9 +129,7 @@
         width = maxWidth;
         height = width / imageWidth * imageHeight;
     }
-    
-//    NSLog(@"max height: %d, max width: %d, imageHeight: %f, imageWidth: %f, height: %f, width: %f", maxHeight, maxWidth, imageHeight, imageWidth, height, width);
-    
+
     return [[UIImageView alloc] initWithFrame:CGRectMake((maxWidth-width)/2, (maxHeight-height)/2, width, height)];
 }
 
@@ -116,6 +140,52 @@
     self.cropRegionView.parentView = self.imageView;
     self.cropRegionView.imageBoundsInView = CGRectMake(self.imageView.bounds.origin.x, self.imageView.bounds.origin.y, self.imageView.bounds.size.width, self.imageView.bounds.size.height);
     [self.imageView addSubview:self.cropRegionView];
+}
+
+- (void)applyVignetteFilter
+{
+    [self applyFilter:@"CIVignette"];
+}
+
+- (void)applyChromeFilter
+{
+    [self applyFilter:@"CIPhotoEffectChrome"];
+}
+
+- (void)applyPosterizeFilter
+{
+    [self applyFilter:@"CIColorPosterize"];
+}
+
+- (void)applyFilter:(NSString*)filterName
+{
+    if (self.imageView.image != nil) {
+        CIContext *context = [CIContext contextWithOptions:nil];
+        
+        NSData *pngData = [NSData dataWithContentsOfFile:self.item.origPath];
+        UIImage *image = [UIImage imageWithData:pngData];
+        
+        CIImage *original = [CIImage imageWithCGImage:image.CGImage];
+        CIFilter *filter = [CIFilter filterWithName:@"CIPhotoEffectFade"];
+        [filter setValue:original forKey:@"inputImage"];
+        CIImage *newImage = [filter valueForKey:@"outputImage"];
+
+        CIFilter *sepia = [CIFilter filterWithName:filterName];
+        [sepia setValue:newImage forKey:@"inputImage"];
+        CIImage *newNewImage = [sepia valueForKey:@"outputImage"];
+        
+        CGImageRef cgimage = [context createCGImage:newNewImage fromRect:[newNewImage extent]];
+        
+        UIImage *newUIImage = [UIImage imageWithCGImage:cgimage];
+        CGImageRelease(cgimage);
+        
+        
+        // uncomment this line if you want to skip from CI to UI image... avoiding CG
+        // this will allow you to avoid the need for creating a context and releasing a created CGImage
+        //UIImage *newUIImage = [UIImage imageWithCIImage:newNewImage];
+        
+        [self.imageView setImage:newUIImage];
+    }
 }
 
 - (void)viewDidLoad

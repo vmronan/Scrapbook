@@ -16,19 +16,16 @@
     NSData *pngData = UIImagePNGRepresentation(image);
     NSString *filePath = [self documentsPathForFileName:[NSString stringWithFormat:@"%d.png", arc4random() % 9999999]];     // Name file a random 8-digit number with png extension
     [pngData writeToFile:filePath atomically:YES];    // Write the file
-    NSLog(@"saving original image at path: %@", filePath);
     return filePath;
 }
 
 + (NSString *)saveEditedImage:(UIImage *)image fromOrigPath:(NSString *)origPath
 {
     NSString *origFilename = [[origPath lastPathComponent] stringByDeletingPathExtension];
-    NSLog(@"orig filename is %@", origFilename);
     
     NSData *pngData = UIImagePNGRepresentation(image);
     NSString *filePath = [self documentsPathForFileName:[NSString stringWithFormat:@"%@_edit.png", origFilename]];     // Name file a random 8-digit number with png extension
     [pngData writeToFile:filePath atomically:YES];    // Write the file
-    NSLog(@"saving edited image at path: %@", filePath);
     return filePath;
 }
 

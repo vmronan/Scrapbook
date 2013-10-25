@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ScrapbookModel.h"
-#import "PhotoCropVC.h"
+#import "PhotoEditVC.h"
 
 @interface ScrapbookItemEditVC : UIViewController
 
