@@ -19,6 +19,7 @@
     self = [super initWithStyle:style];
     if (self) {
         [self setTitle:@"My Scrapbook"];
+        self.navigationItem.hidesBackButton = YES;
         
         self.items = [self.model allItems];
         

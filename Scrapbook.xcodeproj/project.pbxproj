@@ -16,6 +16,7 @@
 		93275E9E181A1ABD00829966 /* crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9D181A1ABD00829966 /* crop.png */; };
 		93275EA1181A1BA400829966 /* PhotoCropVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA0181A1BA400829966 /* PhotoCropVC.m */; };
 		93275EAA181A23A500829966 /* CropRegionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA9181A23A500829966 /* CropRegionView.m */; };
+		93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EAC181A478F00829966 /* LocalPhotoSaver.m */; };
 		93863FB117FE854400402448 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 93863FB017FE854400402448 /* Database.m */; };
 		93863FB317FE867400402448 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 93863FB217FE867400402448 /* libsqlite3.dylib */; };
 		93863FB517FE910100402448 /* items.sql in Resources */ = {isa = PBXBuildFile; fileRef = 93863FB417FE910100402448 /* items.sql */; };
@@ -61,6 +62,8 @@
 		93275EA0181A1BA400829966 /* PhotoCropVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCropVC.m; sourceTree = "<group>"; };
 		93275EA8181A23A500829966 /* CropRegionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionView.h; sourceTree = "<group>"; };
 		93275EA9181A23A500829966 /* CropRegionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionView.m; sourceTree = "<group>"; };
+		93275EAB181A478F00829966 /* LocalPhotoSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPhotoSaver.h; sourceTree = "<group>"; };
+		93275EAC181A478F00829966 /* LocalPhotoSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPhotoSaver.m; sourceTree = "<group>"; };
 		93863FAF17FE854400402448 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		93863FB017FE854400402448 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
 		93863FB217FE867400402448 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -165,6 +168,8 @@
 				93C8A90417F7D46700C861C4 /* ScrapbookItem.m */,
 				93C8A90617F7D48A00C861C4 /* ScrapbookModel.h */,
 				93C8A90717F7D48A00C861C4 /* ScrapbookModel.m */,
+				93275EAB181A478F00829966 /* LocalPhotoSaver.h */,
+				93275EAC181A478F00829966 /* LocalPhotoSaver.m */,
 				93863FAF17FE854400402448 /* Database.h */,
 				93863FB017FE854400402448 /* Database.m */,
 			);
@@ -364,6 +369,7 @@
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,
 				93C8A90517F7D46700C861C4 /* ScrapbookItem.m in Sources */,
 				93863FB117FE854400402448 /* Database.m in Sources */,
+				93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */,
 				93275EAA181A23A500829966 /* CropRegionView.m in Sources */,
 				93C8A90817F7D48A00C861C4 /* ScrapbookModel.m in Sources */,
 			);

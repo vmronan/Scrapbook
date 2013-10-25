@@ -57,6 +57,13 @@
     [self.items removeObjectAtIndex:index];
 }
 
+- (void)saveCroppedItem
+{
+    // Saves cropped image to Documents folder
+    
+    // Updates current path to cropped image
+}
+
 - (ScrapbookItem*)itemAtIndex:(int)index
 {
     return [self.items objectAtIndex:index];

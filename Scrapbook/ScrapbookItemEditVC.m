@@ -22,8 +22,6 @@
         // Custom initialization
         [self.navigationItem setTitle:@"Edit photo"];
         
-        self.item = [[ScrapbookItem alloc] init];
-        
         // Make save button in navigation bar
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
         [self.navigationItem setRightBarButtonItem:saveButton animated:NO];
@@ -39,8 +37,11 @@
 
 - (IBAction)cropButtonPressed:(id)sender
 {
+    // Go to crop view
     PhotoCropVC *photoCropVC = [[PhotoCropVC alloc] init];
-    [photoCropVC showPhotoAtPath:self.item.origPath];       // show original photo to crop
+    photoCropVC.model = self.model;
+    photoCropVC.item = self.item;
+    [photoCropVC showOrigPhoto];       // show original photo to crop
     [self.navigationController pushViewController:photoCropVC animated:YES];
 }
 

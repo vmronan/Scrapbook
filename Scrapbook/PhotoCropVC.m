@@ -22,8 +22,6 @@
         [self.navigationItem setTitle:@"Crop photo"];
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
-        // setup the main image view
-    
         // Make done button in navigation bar
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
         [self.navigationItem setRightBarButtonItem:doneButton animated:NO];
@@ -37,7 +35,15 @@
     UIImage *croppedImage = [self getCroppedImage];
     
     // Save image
-    // ******
+    self.item.currentPath = [LocalPhotoSaver saveEditedImage:croppedImage fromOrigPath:self.item.origPath];
+    
+    // Go back to edit view
+    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    [scrapbookItemEditVC editItem:self.item];
+    scrapbookItemEditVC.model = self.model;
+    
+    // Push the view controller.
+    [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
 }
 
 - (UIImage *)getCroppedImage
@@ -58,10 +64,10 @@
     return croppedUIImage;
 }
 
-- (void)showPhotoAtPath:(NSString *)path
+- (void)showOrigPhoto
 {
     // Read image from documents folder
-    NSData *pngData = [NSData dataWithContentsOfFile:path];
+    NSData *pngData = [NSData dataWithContentsOfFile:self.item.origPath];
     UIImage *image = [UIImage imageWithData:pngData];
     
     // Show image with height of the screen's width

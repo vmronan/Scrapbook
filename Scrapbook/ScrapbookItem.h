@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LocalPhotoSaver.h"
 
 @interface ScrapbookItem : NSObject
 
@@ -18,8 +19,5 @@
 
 - (id)initWithImage:(UIImage*)image title:(NSString*)title description:(NSString*)description rowId:(int)rowId;
 - (id)initWithOrigPath:(NSString *)origPath currentPath:(NSString* )currentPath title:(NSString *)title description:(NSString *)description rowId:(int)rowId;
-
-- (NSString *)saveImage:(UIImage*)image;
-- (NSString *)documentsPathForFileName:(NSString *)name;
 
 @end

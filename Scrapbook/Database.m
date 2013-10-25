@@ -167,7 +167,6 @@ static sqlite3_stmt *deleteItem;
 
 + (void)updateScrapbookItemWithOrigPath:(NSString *)origPath currentPath:(NSString *)currentPath title:(NSString *)title description:(NSString *)description atRow:(int)rowId
 {
-    NSLog(@"updating title to %@, description to %@", title, description);
     // Bind data to the statement
     sqlite3_bind_text(updateItem, 1, [origPath UTF8String], -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(updateItem, 2, [currentPath UTF8String], -1, SQLITE_TRANSIENT);
