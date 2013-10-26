@@ -21,12 +21,61 @@
     if (self) {
         // Custom initialization
         [self.navigationItem setTitle:@"Edit photo"];
-        
+                
         // Make save button in navigation bar
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
         [self.navigationItem setRightBarButtonItem:saveButton animated:NO];
     }
     return self;
+}
+
+- (void)loadView
+{
+    int filterRowHeight = 80;
+    int imageHeight = self.imageView.bounds.size.height;
+    int buttonRowHeight = 40;
+    int textFieldHeight = 30;
+    int space = 4;
+    
+    CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
+    self.scrollView=[[UIScrollView alloc] initWithFrame:fullScreenRect];
+    self.scrollView.contentSize=CGSizeMake(320,filterRowHeight+imageHeight+buttonRowHeight+2*textFieldHeight+5*space);
+    
+    // do any further configuration to the scroll view
+    // add a view, or views, as a subview of the scroll view.
+    
+    self.cropButton = [[UIButton alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+space, buttonRowHeight, buttonRowHeight)];
+    [self.cropButton setImage:[UIImage imageNamed:@"crop.png"] forState:UIControlStateNormal];
+    [self.cropButton addTarget:self action:@selector(cropButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.titleField = [[UITextField alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+buttonRowHeight+2*space, 300, 30)];
+    [self.titleField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.titleField setPlaceholder:@"Title"];
+    
+    self.descriptionField = [[UITextField alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+buttonRowHeight+textFieldHeight+3*space, 300, 30)];
+    [self.descriptionField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.descriptionField setPlaceholder:@"Description"];
+    
+    if(self.item.rowId != -1) {
+        [self.titleField setText:self.item.title];
+        [self.descriptionField setText:self.item.description];
+    }
+    
+    // Show buttons and text fields
+    [self.scrollView addSubview:self.imageView];
+    [self.scrollView addSubview:self.cropButton];
+    [self.scrollView addSubview:self.titleField];
+    [self.scrollView addSubview:self.descriptionField];
+    
+    // Hide keyboard when user touches outside it
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.scrollView addGestureRecognizer:tap];
+    
+    // Set view to scrollview
+    self.view=self.scrollView;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -35,7 +84,7 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
-- (IBAction)cropButtonPressed:(id)sender
+- (void)cropButtonPressed
 {
     [self saveItem];
     
@@ -71,6 +120,12 @@
     [self showPhotoAtPath:item.currentPath];
 }
 
+- (void)editPhotoAtPath:(NSString *)path
+{
+    [self showPhotoAtPath:path];
+
+}
+
 - (void)showPhotoAtPath:(NSString *)path
 {
     // Read image from documents folder
@@ -79,35 +134,41 @@
     
     // Show image with height of the screen's width
     int screenWidth = self.view.bounds.size.width;
-    float scaledImageWidth = image.size.width / image.size.height * screenWidth;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-scaledImageWidth)/2, 80, scaledImageWidth, screenWidth)];
-    
-//    // Show image at full width of screen
-//    int screenWidth = self.view.bounds.size.width;
-//    float imageRatio = image.size.height / image.size.width;
-//    float scaledImageHeight = screenWidth * imageRatio;
-
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, screenWidth, scaledImageHeight)];
-    [imageView setImage:image];
-    [self.view addSubview:imageView];
+    self.imageView = [self setImageViewForImage:image withMaxWidth:screenWidth maxHeight:screenWidth];
+    [self.imageView setImage:image];
+//    [self.scrollView addSubview:self.imageView];
 }
 
-- (void)editPhotoAtPath:(NSString *)path
+- (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight
 {
-    [self showPhotoAtPath:path];
+    float imageWidth = image.size.width;
+    float imageHeight = image.size.height;
+    float width, height;    // to be defined
+    
+    if(imageHeight/imageWidth > 1.0) {
+        // Image is tall (or square)
+        height = maxHeight;
+        width = height / imageHeight * imageWidth;
+    }
+    else {
+        // Image is wide
+        width = maxWidth;
+        height = width / imageWidth * imageHeight;
+    }
+    
+    return [[UIImageView alloc] initWithFrame:CGRectMake((maxWidth-width)/2, 80, width, height)];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [self.titleField setPlaceholder:@"Title"];
-    [self.descriptionField setPlaceholder:@"Description"];
-    if(self.item.rowId != -1) {
-        [self.titleField setText:self.item.title];
-        [self.descriptionField setText:self.item.description];
-    }
+}
+
+-(void)dismissKeyboard {
+    NSLog(@"dismissing keyboard");
+    [self.titleField resignFirstResponder];
+    [self.descriptionField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

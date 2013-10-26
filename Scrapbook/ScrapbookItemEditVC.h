@@ -14,11 +14,15 @@
 
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) ScrapbookItem *item;
-@property (strong, nonatomic) IBOutlet UITextField *titleField;
-@property (strong, nonatomic) IBOutlet UITextField *descriptionField;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UITextField *titleField;
+@property (strong, nonatomic) UITextField *descriptionField;
+@property (strong, nonatomic) UIButton *cropButton;
+@property (strong, nonatomic) UIButton *revertButton;
 
 - (void)saveItem;
-- (IBAction)cropButtonPressed:(id)sender;
+- (void)cropButtonPressed;
 - (void)editItem:(ScrapbookItem*)item;
 - (void)editPhotoAtPath:(NSString*)path;
 - (void)showPhotoAtPath:(NSString*)path;
