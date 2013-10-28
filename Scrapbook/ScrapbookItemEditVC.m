@@ -41,12 +41,11 @@
     // Get current image
     NSData *pngCurrentData = [NSData dataWithContentsOfFile:self.item.currentPath];
     UIImage *currentImage = [UIImage imageWithData:pngCurrentData];
-    // Get adjusted height of current image
     
     // Define filter row's height
     int filterRowHeight = 80*self.origImage.size.height/self.origImage.size.width+16;
     
-    // Get current image (with maximum height of the screen's width)
+    // Get view for current image (with maximum height of the screen's width)
     int screenWidth = self.view.bounds.size.width;
     self.photoView = [[PhotoView alloc] initWithFrame:[self getPhotoFrameForImage:currentImage withMaxWidth:screenWidth maxHeight:screenWidth atHeight:filterRowHeight] photo:currentImage];
     
@@ -54,7 +53,6 @@
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     self.scrollView=[[UIScrollView alloc] initWithFrame:fullScreenRect];
     self.scrollView.contentSize=CGSizeMake(320,filterRowHeight+self.photoView.bounds.size.height);
-    self.scrollView.userInteractionEnabled = YES;
     
     // Show filter options with original image
     self.filters = [[NSArray alloc] initWithObjects:
@@ -65,13 +63,10 @@
     self.filterNames = [[NSArray alloc] initWithObjects:@"Original", @"Vignette", @"Chrome", @"Posterize", @"Pixellate", nil];
     self.filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(0, 0, 320, filterRowHeight) image:self.origImage target:self filters:self.filters filterNames:self.filterNames];
     [self.filtersView showFilters];
-    self.filtersView.userInteractionEnabled = YES;
     
     // Add buttons and text fields to view
     [self.scrollView addSubview:self.filtersView];
     [self.scrollView addSubview:self.photoView];
-    
-    self.scrollView.userInteractionEnabled=YES;
     
     // Set view to scrollview
     self.view=self.scrollView;

@@ -1,33 +1,29 @@
 //
-//  CropRegionView.m
+//  CropRegionVC.m
 //  Scrapbook
 //
-//  Created by Vanessa Ronan on 10/24/13.
+//  Created by Vanessa Ronan on 10/28/13.
 //  Copyright (c) 2013 Vanessa Ronan. All rights reserved.
 //
 
-#import "CropRegionView.h"
+#import "CropRegion.h"
 
-@implementation CropRegionView
+@implementation CropRegion
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)showCropRegion
-{
-    self.center = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width/2-50, self.bounds.size.height/2-50, 100, 100)];
+        // Custom initialization
+        self.centerBox = [[UIView alloc] initWithFrame:CGRectMake(self.bounds.size.width/2-50, self.bounds.size.height/2-50, 100, 100)];
+        [self.centerBox setBackgroundColor:[UIColor whiteColor]];
+        [self.centerBox setAlpha:0.5];
+        [self addSubview:self.centerBox];
+        
         self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(resize)];
         [self addGestureRecognizer:self.pinchRecognizer];
-    
-    [self.center setBackgroundColor:[UIColor whiteColor]];
-    [self.center setAlpha:0.5];
-    [self addSubview:self.center];
+    }
+    return self;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -40,11 +36,11 @@
         CGFloat deltaY = [[touches anyObject] locationInView:self.superview].y - [[touches anyObject] previousLocationInView:self.superview].y;
         
         // make the new positions
-        CGFloat newX = self.center.frame.origin.x + deltaX;
-        CGFloat newY = self.center.frame.origin.y + deltaY;
+        CGFloat newX = self.centerBox.frame.origin.x + deltaX;
+        CGFloat newY = self.centerBox.frame.origin.y + deltaY;
         
         // move the view
-        [self.center setFrame:CGRectMake(newX, newY, self.frame.size.width, self.frame.size.height)];
+        self.centerBox.frame = CGRectMake(newX, newY, self.centerBox.frame.size.width, self.centerBox.frame.size.height);
         
         // check to see if we've moved the view beyond it's appropriate bounds
         [self checkBounds];
@@ -54,15 +50,14 @@
 // adjust the view to be within the bounds of the image as it appears in the imageView
 - (void)checkBounds
 {
-    NSLog(@"checking bounds");
-    CGFloat newX = self.frame.origin.x;
-    CGFloat newY = self.frame.origin.y;
+    
+    CGFloat newX = self.centerBox.frame.origin.x;
+    CGFloat newY = self.centerBox.frame.origin.y;
     
     // the maximum edges cannot be precomputed without the width and height of this view, which could change
     // if a pinch gesture is implemented
-    CGFloat maxX = self.frame.origin.x + self.frame.size.width - self.center.frame.size.width;
-    CGFloat maxY = self.frame.origin.y + self.frame.size.height - self.center.frame.size.height;
-    
+    CGFloat maxX = self.frame.origin.x + self.frame.size.width - self.centerBox.frame.size.width;
+    CGFloat maxY = self.frame.origin.y + self.frame.size.height - self.centerBox.frame.size.height;
     
     // check bounds
     if (newX < self.frame.origin.x) {
@@ -80,27 +75,7 @@
     }
     
     // move to the bounded location
-    [self.center setFrame:CGRectMake(newX, newY, self.center.frame.size.width, self.center.frame.size.height)];
-}
-
-- (void)resize
-{
-    CGFloat new_size;
-    
-    if (self.pinchRecognizer.scale < 1.0) {
-        new_size = self.center.frame.size.width + (self.pinchRecognizer.velocity / self.pinchRecognizer.scale);
-    } else {
-        
-        new_size = self.center.frame.size.width + self.pinchRecognizer.velocity;
-    }
-    
-    CGFloat delta = (self.center.frame.size.width - new_size)/2;
-    if(new_size > 320) {
-        new_size = 320;
-    }
-    [self.center setFrame:CGRectMake(self.center.frame.origin.x + delta, self.center.frame.origin.y + delta, new_size, new_size)];
-    
-    [self checkBounds];
+    self.centerBox.frame = CGRectMake(newX, newY, self.centerBox.frame.size.width, self.centerBox.frame.size.height);
 }
 
 /*
@@ -116,11 +91,11 @@
      * the inImageViewX can be computed to be the cropper's x coordinate in
      * the image view minus the image's x coordinate in the image view
      */
-    CGFloat inImageX = ((self.frame.origin.x - self.frame.origin.x) / self.frame.size.width) * self.parentView.image.size.width;
-    CGFloat inImageY = ((self.frame.origin.y - self.frame.origin.y) / self.frame.size.height) * self.parentView.image.size.height;
+    CGFloat inImageX = ((self.centerBox.frame.origin.x - self.frame.origin.x) / self.frame.size.width) * self.parentView.image.size.width;
+    CGFloat inImageY = ((self.centerBox.frame.origin.y - self.frame.origin.y) / self.frame.size.height) * self.parentView.image.size.height;
     
     // a similar ratio gives us the image size... fortunately we are using a square. Things get complex fast without a square
-    CGFloat inImageSize = (self.frame.size.width / self.frame.size.width) * self.parentView.image.size.width;
+    CGFloat inImageSize = (self.centerBox.frame.size.width / self.frame.size.width) * self.parentView.image.size.width;
     
     // return the computed bounds NOTE: if you wish to return the bounds for a CIImage crop, the y bound must be:
     // original_image_height - inImageY - inImageSize because the CIImage cooridnate system is flipped in the y
@@ -128,14 +103,36 @@
     return CGRectMake(inImageX, inImageY, inImageSize, inImageSize);
 }
 
+//- (void)toggleCropRegion
+//{
+////    if([self.center isHidden]) {
+////        self.center.hidden = NO;
+////    }
+////    else {
+////        self.center.hidden = YES;
+////    }
+//}
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+
+- (void)resize
 {
-    // Drawing code
+    CGFloat new_size;
+    
+    if (self.pinchRecognizer.scale < 1.0) {
+        new_size = self.centerBox.frame.size.width + (self.pinchRecognizer.velocity / self.pinchRecognizer.scale);
+    } else {
+        
+        new_size = self.centerBox.frame.size.width + self.pinchRecognizer.velocity;
+    }
+    
+    CGFloat delta = (self.centerBox.frame.size.width - new_size)/2;
+    if(new_size > 320) {
+        new_size = 320;
+    }
+    [self.centerBox setFrame:CGRectMake(self.centerBox.frame.origin.x + delta, self.centerBox.frame.origin.y + delta, new_size, new_size)];
+    
+    [self checkBounds];
 }
-*/
+
 
 @end

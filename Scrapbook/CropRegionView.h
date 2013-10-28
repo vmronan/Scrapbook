@@ -12,9 +12,19 @@
 
 @property (strong, nonatomic) UIImageView *parentView;
 @property CGRect imageBoundsInView;
+@property UIPinchGestureRecognizer *pinchRecognizer;
+
+@property UIView *center;
+@property CGRect left;
+@property CGRect right;
+@property CGRect top;
+@property CGRect bottom;
 
 - (void)checkBounds;
 - (CGRect)cropBounds;
+
+- (void)showCropRegion;
+- (void)toggleCropRegion;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 

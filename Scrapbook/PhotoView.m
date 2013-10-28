@@ -23,20 +23,21 @@
 
 - (UIImage *)getCroppedImage
 {
-    // Get temporary UIImage of pixels in crop region from the original image
-    CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.imageView.image.CGImage, [self.cropRegionView cropBounds]);
-    UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
-    
-    // Draw UIImage with the new dimensions in the image context
-    UIGraphicsBeginImageContext(CGSizeMake(320.0, 320.0));
-    [temp drawInRect:CGRectMake(0, 0, 320, 320)];
-    UIImage *croppedUIImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // End the graphics context and release the CGImage
-    UIGraphicsEndImageContext();
-    CGImageRelease(croppedCGImage);
-    
-    return croppedUIImage;
+//    // Get temporary UIImage of pixels in crop region from the original image
+//    CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.imageView.image.CGImage, [self.cropRegionView cropBounds]);
+//    UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
+//    
+//    // Draw UIImage with the new dimensions in the image context
+//    UIGraphicsBeginImageContext(CGSizeMake(320.0, 320.0));
+//    [temp drawInRect:CGRectMake(0, 0, 320, 320)];
+//    UIImage *croppedUIImage = UIGraphicsGetImageFromCurrentImageContext();
+//    
+//    // End the graphics context and release the CGImage
+//    UIGraphicsEndImageContext();
+//    CGImageRelease(croppedCGImage);
+//    
+//    return croppedUIImage;
+    return nil;
 }
 
 - (void)showPhoto:(UIImage *)photo
@@ -71,21 +72,20 @@
 - (void)showCropRegion
 {
     NSLog(@"creating crop region. ");
+    self.cropRegion = [[CropRegion alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
+    self.cropRegion.parentView = self;
+    [self addSubview:self.cropRegion];
+    
     // Create and show cropping box
-    self.cropRegionView = [[CropRegionView alloc] initWithFrame:CGRectMake(self.bounds.size.width/2-50, self.bounds.size.height/2-50, 100, 100)];
-    self.cropRegionView.parentView = self;
-    self.cropRegionView.imageBoundsInView = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height);
-    [self addSubview:self.cropRegionView];
+//    self.cropRegionView = [[CropRegionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+//    self.cropRegionView.parentView = self;
+//    [self addSubview:self.cropRegionView];
+//    [self.cropRegionView showCropRegion];
 }
 
 - (void)toggleCropRegion
 {
-    if([self.cropRegionView isHidden]) {
-        self.cropRegionView.hidden = NO;
-    }
-    else {
-        self.cropRegionView.hidden = YES;
-    }
+    [self.cropRegion toggleCropRegion];
 }
 
 @end

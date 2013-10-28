@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CropRegionView.h"
+#import "CropRegion.h"
 
 @interface PhotoView : UIImageView
 
 @property (strong, nonatomic) UIImageView *imageView;
-@property CropRegionView *cropRegionView;
+@property (strong, nonatomic) CropRegion *cropRegion;
+//@property CropRegionView *cropRegionView;
 
 - (id)initWithFrame:(CGRect)frame photo:(UIImage *)photo;
 - (void)showPhoto:(UIImage *)photo;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		931920C4181E45F20087FCE5 /* CropRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 931920C3181E45F20087FCE5 /* CropRegion.m */; };
 		9325719B180F351A0000B146 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9325719A180F351A0000B146 /* Images.xcassets */; };
 		932571A0180F36650000B146 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719E180F36650000B146 /* app_icon.png */; };
 		932571A1180F36650000B146 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719F180F36650000B146 /* app_icon@2x.png */; };
@@ -55,6 +56,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		931920C2181E45F20087FCE5 /* CropRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegion.h; sourceTree = "<group>"; };
+		931920C3181E45F20087FCE5 /* CropRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegion.m; sourceTree = "<group>"; };
 		9325719A180F351A0000B146 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9325719E180F36650000B146 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
 		9325719F180F36650000B146 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon@2x.png"; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				93DDB1F8181DDB100063A65A /* FiltersView.m */,
 				93275E9F181A1BA400829966 /* PhotoView.h */,
 				93275EA0181A1BA400829966 /* PhotoView.m */,
+				931920C2181E45F20087FCE5 /* CropRegion.h */,
+				931920C3181E45F20087FCE5 /* CropRegion.m */,
 				93275EA8181A23A500829966 /* CropRegionView.h */,
 				93275EA9181A23A500829966 /* CropRegionView.m */,
 			);
@@ -365,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C8A8D917F7CBCF00C861C4 /* main.m in Sources */,
+				931920C4181E45F20087FCE5 /* CropRegion.m in Sources */,
 				93C8A8DD17F7CBCF00C861C4 /* AppDelegate.m in Sources */,
 				93916230180B9B6B008B270F /* ScrapbookItemCellView.m in Sources */,
 				93C8A8F617F7CD5D00C861C4 /* ScrapbookItemEditVC.m in Sources */,
