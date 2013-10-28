@@ -34,7 +34,7 @@
 {
     // Get original image
     NSData *pngOrigData = [NSData dataWithContentsOfFile:self.item.origPath];
-    UIImage *origImage = [UIImage imageWithData:pngOrigData];
+    self.origImage = [UIImage imageWithData:pngOrigData];
     
     // Get current image
     NSData *pngCurrentData = [NSData dataWithContentsOfFile:self.item.currentPath];
@@ -42,7 +42,7 @@
     // Get adjusted height of current image
     
     // Define filter row's height
-    int filterRowHeight = 80*origImage.size.height/origImage.size.width+20;
+    int filterRowHeight = 80*self.origImage.size.height/self.origImage.size.width+20;
     
     // Get current image (with maximum height of the screen's width)
     int screenWidth = self.view.bounds.size.width;
@@ -59,9 +59,16 @@
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     self.scrollView=[[UIScrollView alloc] initWithFrame:fullScreenRect];
     self.scrollView.contentSize=CGSizeMake(320,filterRowHeight+imageHeight+buttonRowHeight+2*textFieldHeight+5*space);
+    self.scrollView.userInteractionEnabled = YES;
     
     // Show filter options with original image
-    self.filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(0, 0, 320, filterRowHeight) image:origImage];
+    self.filters = [[NSArray alloc] initWithObjects:[CIFilter filterWithName:@"CIVignette"],
+                        [CIFilter filterWithName:@"CIPhotoEffectChrome"],
+                        [CIFilter filterWithName:@"CIColorPosterize"], nil];
+    self.filterNames = [[NSArray alloc] initWithObjects:@"Normal", @"Vignette", @"Chrome", @"Posterize", nil];
+    self.filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(0, 0, 320, filterRowHeight) image:self.origImage target:self filters:self.filters filterNames:self.filterNames];
+    [self.filtersView showFilters];
+    self.filtersView.userInteractionEnabled = YES;
     
     // Show crop button
     self.cropButton = [[UIButton alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+space, buttonRowHeight, buttonRowHeight)];
@@ -92,13 +99,41 @@
     [self.scrollView addSubview:self.descriptionField];
     
     // Hide keyboard when user touches outside it
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    [self.scrollView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self
+//                                   action:@selector(dismissKeyboard)];
+//    [self.scrollView addGestureRecognizer:tap];
+    self.scrollView.userInteractionEnabled=YES;
     
     // Set view to scrollview
     self.view=self.scrollView;
+}
+
+- (void)applyFilter:(UITapGestureRecognizer *)sender
+{
+    NSLog(@"applying filter");
+    if([sender.view tag] == -1) {
+        // Show original image
+        [self.imageView setImage:self.origImage];
+    }
+    else {
+        CIFilter *filter = [self.filters objectAtIndex:[sender.view tag]];
+        CIContext *context = [CIContext contextWithOptions:nil];
+        
+        CIImage *original = [CIImage imageWithCGImage:self.origImage.CGImage];
+        CIFilter *fadeFilter = [CIFilter filterWithName:@"CIPhotoEffectFade"];
+        [fadeFilter setValue:original forKey:@"inputImage"];
+        CIImage *newImage = [fadeFilter valueForKey:@"outputImage"];
+        
+        [filter setValue:newImage forKey:@"inputImage"];
+        CIImage *newNewImage = [filter valueForKey:@"outputImage"];
+        
+        CGImageRef cgimage = [context createCGImage:newNewImage fromRect:[newNewImage extent]];
+        UIImage *newUIImage = [UIImage imageWithCGImage:cgimage];
+        CGImageRelease(cgimage);
+        
+        [self.imageView setImage:newUIImage];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -140,11 +175,6 @@
 - (void)editPhotoAtPath:(NSString *)path
 {
     [self showPhotoAtPath:path];
-}
-
-- (void)showPhotoAtPath:(NSString *)path
-{
-
 }
 
 - (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y

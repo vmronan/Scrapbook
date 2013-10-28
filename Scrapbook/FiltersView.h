@@ -13,7 +13,13 @@
 @property int height;
 @property int width;
 @property (strong, nonatomic) UIImage *image;
+@property id target;
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)image;
+@property (strong, nonatomic) NSArray *filters;
+@property (strong, nonatomic) NSArray *filterNames;
+
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)image target:(id)target filters:(NSArray *)filters filterNames:(NSArray *)filterNames;
+- (void)showFilters;
+- (void)test;
 
 @end

@@ -10,16 +10,19 @@
 
 @implementation FiltersView
 
-- (id)initWithFrame:(CGRect)frame image:(UIImage *)image
+- (id)initWithFrame:(CGRect)frame image:(UIImage *)image target:(id)target filters:(NSArray *)filters filterNames:(NSArray *)filterNames
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.target = target;
+        self.filters = filters;
+        self.filterNames = filterNames;
+        
         self.width = 80;
         self.height = frame.size.height-20;
         
         [self shrinkImage:image];
-        [self showFilters];
     }
     return self;
 }
@@ -37,25 +40,23 @@
 
 - (void)showFilters
 {
-    NSArray *filters = [[NSArray alloc] initWithObjects:[CIFilter filterWithName:@"CIVignette"],
-                        [CIFilter filterWithName:@"CIPhotoEffectChrome"],
-                        [CIFilter filterWithName:@"CIColorPosterize"], nil];
-    NSArray *filterNames = [[NSArray alloc] initWithObjects:@"Original", @"Vignette", @"Chrome", @"Posterize", nil];
-    
-    // Show original image
-    
-    for(int i = 0; i < [filterNames count]; i++) {
+    for(int i = 0; i < [self.filterNames count]; i++) {
+        // Filter image
         UIImage *filteredImage = self.image;
         if(i != 0) {
-            filteredImage = [self applyFilter:[filters objectAtIndex:i-1]];
+            filteredImage = [self applyFilter:[self.filters objectAtIndex:i-1]];     // i-1 to ignore the Normal label
         }
         
+        // Put filtered image in imageview and add tap recognizer
         UIImageView *filteredImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.width*i, 0, self.width, self.height)];
         [filteredImageView setImage:filteredImage];
+        filteredImageView.tag = i-1;
+        UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.target action:@selector(applyFilter:)];
+        [filteredImageView addGestureRecognizer:tap];
+        filteredImageView.userInteractionEnabled = YES;
         
         UILabel *filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width*i, self.height, self.width, 20)];
-        [filterLabel setText:[filterNames objectAtIndex:i]];
-        
+        [filterLabel setText:[self.filterNames objectAtIndex:i]];
         [filterLabel setFont:[UIFont systemFontOfSize:12]];
         [filterLabel setTextAlignment:NSTextAlignmentCenter];
         
@@ -63,6 +64,7 @@
         [self addSubview:filterLabel];
     }
 }
+
 
 - (UIImage *)applyFilter:(CIFilter *)filter
 {

@@ -18,11 +18,16 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) FiltersView *filtersView;
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIImage *origImage;
 @property (strong, nonatomic) UITextField *titleField;
 @property (strong, nonatomic) UITextField *descriptionField;
 @property (strong, nonatomic) UIButton *cropButton;
 @property (strong, nonatomic) UIButton *revertButton;
 
+@property (strong, nonatomic) NSArray *filters;
+@property (strong, nonatomic) NSArray *filterNames;
+
+- (void)applyFilter:(UITapGestureRecognizer*)sender;
 - (void)saveItem;
 - (void)showView;
 - (void)cropButtonPressed;
