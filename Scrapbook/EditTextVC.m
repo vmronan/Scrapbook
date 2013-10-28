@@ -53,6 +53,7 @@
     self.item.title = self.titleField.text;
     self.item.description = self.descriptionField.text;
     self.item.currentPath = [LocalPhotoSaver saveEditedImage:self.imageView.image fromOrigPath:self.item.origPath];
+    [self.model saveItem:self.item];
 }
 
 - (void)setupWithImage:(UIImage *)image
@@ -74,7 +75,6 @@
     self.imageView = [[UIImageView alloc] initWithImage:image];
     [self.imageView setFrame:[self getPhotoFrameForImage:image withMaxWidth:self.view.bounds.size.width maxHeight:self.view.bounds.size.height atHeight:90]];
     [self.view addSubview:self.imageView];
-    
 }
 
 - (CGRect)getPhotoFrameForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y
@@ -98,7 +98,6 @@
 }
 
 -(void)dismissKeyboard {
-    NSLog(@"dismissing keyboard");
     [self.titleField resignFirstResponder];
     [self.descriptionField resignFirstResponder];
 }
