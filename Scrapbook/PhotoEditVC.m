@@ -41,7 +41,8 @@
     
     // Go back to edit view
     ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
-    [scrapbookItemEditVC editItem:self.item];
+    [scrapbookItemEditVC setItem:self.item];
+    [scrapbookItemEditVC loadView];
     scrapbookItemEditVC.model = self.model;
     
     // Push the view controller.
@@ -178,7 +179,6 @@
         
         UIImage *newUIImage = [UIImage imageWithCGImage:cgimage];
         CGImageRelease(cgimage);
-        
         
         // uncomment this line if you want to skip from CI to UI image... avoiding CG
         // this will allow you to avoid the need for creating a context and releasing a created CGImage

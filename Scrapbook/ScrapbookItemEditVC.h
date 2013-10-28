@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ScrapbookModel.h"
 #import "PhotoEditVC.h"
+#import "FiltersView.h"
 
 @interface ScrapbookItemEditVC : UIViewController
 
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) ScrapbookItem *item;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) FiltersView *filtersView;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UITextField *titleField;
 @property (strong, nonatomic) UITextField *descriptionField;
@@ -22,9 +24,8 @@
 @property (strong, nonatomic) UIButton *revertButton;
 
 - (void)saveItem;
+- (void)showView;
 - (void)cropButtonPressed;
-- (void)editItem:(ScrapbookItem*)item;
-- (void)editPhotoAtPath:(NSString*)path;
 - (void)showPhotoAtPath:(NSString*)path;
 
 @end

@@ -21,6 +21,7 @@
     if (self) {
         // Custom initialization
         [self.navigationItem setTitle:@"Edit photo"];
+        [self.view setBackgroundColor:[UIColor whiteColor]];
                 
         // Make save button in navigation bar
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
@@ -29,39 +30,62 @@
     return self;
 }
 
-- (void)loadView
+- (void)showView
 {
-    int filterRowHeight = 80;
+    // Get original image
+    NSData *pngOrigData = [NSData dataWithContentsOfFile:self.item.origPath];
+    UIImage *origImage = [UIImage imageWithData:pngOrigData];
+    
+    // Get current image
+    NSData *pngCurrentData = [NSData dataWithContentsOfFile:self.item.currentPath];
+    UIImage *currentImage = [UIImage imageWithData:pngCurrentData];
+    // Get adjusted height of current image
+    
+    // Define filter row's height
+    int filterRowHeight = 80*origImage.size.height/origImage.size.width+20;
+    
+    // Get current image (with maximum height of the screen's width)
+    int screenWidth = self.view.bounds.size.width;
+    self.imageView = [self setImageViewForImage:currentImage withMaxWidth:screenWidth maxHeight:screenWidth atHeight:filterRowHeight];
+    [self.imageView setImage:currentImage];
+    
+    // Define other heights
     int imageHeight = self.imageView.bounds.size.height;
     int buttonRowHeight = 40;
     int textFieldHeight = 30;
     int space = 4;
     
+    // Initialize scrollview
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     self.scrollView=[[UIScrollView alloc] initWithFrame:fullScreenRect];
     self.scrollView.contentSize=CGSizeMake(320,filterRowHeight+imageHeight+buttonRowHeight+2*textFieldHeight+5*space);
     
-    // do any further configuration to the scroll view
-    // add a view, or views, as a subview of the scroll view.
+    // Show filter options with original image
+    self.filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(0, 0, 320, filterRowHeight) image:origImage];
     
+    // Show crop button
     self.cropButton = [[UIButton alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+space, buttonRowHeight, buttonRowHeight)];
     [self.cropButton setImage:[UIImage imageNamed:@"crop.png"] forState:UIControlStateNormal];
     [self.cropButton addTarget:self action:@selector(cropButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
+    // Show title field
     self.titleField = [[UITextField alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+buttonRowHeight+2*space, 300, 30)];
     [self.titleField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.titleField setPlaceholder:@"Title"];
     
+    // Show description field
     self.descriptionField = [[UITextField alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+buttonRowHeight+textFieldHeight+3*space, 300, 30)];
     [self.descriptionField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.descriptionField setPlaceholder:@"Description"];
     
+    // Show title and description in fields if they're already set
     if(self.item.rowId != -1) {
         [self.titleField setText:self.item.title];
         [self.descriptionField setText:self.item.description];
     }
     
-    // Show buttons and text fields
+    // Add buttons and text fields to view
+    [self.scrollView addSubview:self.filtersView];
     [self.scrollView addSubview:self.imageView];
     [self.scrollView addSubview:self.cropButton];
     [self.scrollView addSubview:self.titleField];
@@ -75,7 +99,6 @@
     
     // Set view to scrollview
     self.view=self.scrollView;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -114,32 +137,17 @@
     [self.model saveItem:self.item];
 }
 
-- (void)editItem:(ScrapbookItem*)item
-{
-    self.item = item;
-    [self showPhotoAtPath:item.currentPath];
-}
-
 - (void)editPhotoAtPath:(NSString *)path
 {
     [self showPhotoAtPath:path];
-
 }
 
 - (void)showPhotoAtPath:(NSString *)path
 {
-    // Read image from documents folder
-    NSData *pngData = [NSData dataWithContentsOfFile:path];
-    UIImage *image = [UIImage imageWithData:pngData];
-    
-    // Show image with height of the screen's width
-    int screenWidth = self.view.bounds.size.width;
-    self.imageView = [self setImageViewForImage:image withMaxWidth:screenWidth maxHeight:screenWidth];
-    [self.imageView setImage:image];
-//    [self.scrollView addSubview:self.imageView];
+
 }
 
-- (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight
+- (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y
 {
     float imageWidth = image.size.width;
     float imageHeight = image.size.height;
@@ -156,7 +164,7 @@
         height = width / imageWidth * imageHeight;
     }
     
-    return [[UIImageView alloc] initWithFrame:CGRectMake((maxWidth-width)/2, 80, width, height)];
+    return [[UIImageView alloc] initWithFrame:CGRectMake((maxWidth-width)/2, y, width, height)];
 }
 
 - (void)viewDidLoad

@@ -54,7 +54,7 @@
     [self.imagePickerVC dismissViewControllerAnimated:YES completion:nil];
     ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
     ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"] title:nil description:nil rowId:-1];
-    [scrapbookItemEditVC editItem:item];
+    [scrapbookItemEditVC setItem:item];
     scrapbookItemEditVC.model = self.model;
     [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
 }

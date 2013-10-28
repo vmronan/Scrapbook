@@ -34,8 +34,8 @@
     ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
-    [scrapbookItemEditVC editItem:self.item];
-    [scrapbookItemEditVC loadView];
+    scrapbookItemEditVC.item = self.item;
+    [scrapbookItemEditVC showView];
     scrapbookItemEditVC.model = self.model;
     
     // Push the view controller.
@@ -66,7 +66,7 @@
     [self.view addSubview:title];
     
     // Show description below title
-    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 26+screenWidth, screenWidth, 30)];
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 30+imageView.bounds.size.height, screenWidth, 30)];
     description.text = self.item.description;
     description.font = [UIFont systemFontOfSize:14];
     description.textAlignment = NSTextAlignmentCenter;

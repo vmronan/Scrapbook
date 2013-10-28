@@ -218,7 +218,7 @@
     
     // Pass the selected object to the new view controller.
     ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[self.photos objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];
-    [scrapbookItemEditVC editItem:item];
+    [scrapbookItemEditVC setItem:item];
     scrapbookItemEditVC.model = self.model;
     
     // Push the view controller.
