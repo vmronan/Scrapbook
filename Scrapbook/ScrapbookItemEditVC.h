@@ -27,7 +27,6 @@
 - (void)applyFilter:(UITapGestureRecognizer*)sender;
 - (void)saveItem;
 - (void)showView;
-- (void)cropButtonPressed;
 - (CGRect)getPhotoFrameForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y;
 
 @end

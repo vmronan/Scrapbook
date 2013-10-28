@@ -127,13 +127,7 @@
 
 - (void)toggleCrop
 {
-    NSLog(@"cropping...");
     [self.photoView toggleCropRegion];
-//    [self saveItem];
-//    
-//    // Go to crop view
-//    PhotoView *photoCropVC = [[PhotoView alloc] init];
-//    [photoCropVC showOrigPhoto];       // show original photo to crop
 }
 
 - (void)saveButtonPressed
@@ -150,7 +144,7 @@
 - (void)saveItem
 {
     // Save image
-    self.item.currentPath = [LocalPhotoSaver saveEditedImage:self.photoView.image fromOrigPath:self.item.origPath];
+    self.item.currentPath = [LocalPhotoSaver saveEditedImage:[self.photoView getCroppedImage] fromOrigPath:self.item.origPath];
 
     [self.model saveItem:self.item];
 }

@@ -31,9 +31,9 @@
     // standard dragging relative movement calculations
     if (self.parentView != nil && [touches count] == 1) {
         // calculate the delta x
-        CGFloat deltaX = [[touches anyObject] locationInView:self.superview].x - [[touches anyObject] previousLocationInView:self.superview].x;
+        CGFloat deltaX = [[touches anyObject] locationInView:self.centerBox].x - [[touches anyObject] previousLocationInView:self.centerBox].x;
         // calculate the delta y
-        CGFloat deltaY = [[touches anyObject] locationInView:self.superview].y - [[touches anyObject] previousLocationInView:self.superview].y;
+        CGFloat deltaY = [[touches anyObject] locationInView:self.centerBox].y - [[touches anyObject] previousLocationInView:self.centerBox].y;
         
         // make the new positions
         CGFloat newX = self.centerBox.frame.origin.x + deltaX;
@@ -50,7 +50,6 @@
 // adjust the view to be within the bounds of the image as it appears in the imageView
 - (void)checkBounds
 {
-    
     CGFloat newX = self.centerBox.frame.origin.x;
     CGFloat newY = self.centerBox.frame.origin.y;
     
@@ -103,15 +102,15 @@
     return CGRectMake(inImageX, inImageY, inImageSize, inImageSize);
 }
 
-//- (void)toggleCropRegion
-//{
-////    if([self.center isHidden]) {
-////        self.center.hidden = NO;
-////    }
-////    else {
-////        self.center.hidden = YES;
-////    }
-//}
+- (void)toggleCropRegion
+{
+    if([self.centerBox isHidden]) {
+        self.centerBox.hidden = NO;
+    }
+    else {
+        self.centerBox.hidden = YES;
+    }
+}
 
 
 - (void)resize

@@ -53,7 +53,6 @@
     
     // Show image with height of the screen's width
     int screenWidth = self.view.bounds.size.width;
-    float scaledImageWidth = image.size.width / image.size.height * screenWidth;
     UIImageView *imageView = [self setImageViewForImage:image withMaxWidth:self.view.bounds.size.width maxHeight:self.view.bounds.size.height - 64];
     [imageView setImage:image];
     [self.view addSubview:imageView];

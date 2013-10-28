@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		931920C4181E45F20087FCE5 /* CropRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 931920C3181E45F20087FCE5 /* CropRegion.m */; };
+		931920C7181ECF530087FCE5 /* CropRegionSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 931920C6181ECF530087FCE5 /* CropRegionSideView.m */; };
 		9325719B180F351A0000B146 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9325719A180F351A0000B146 /* Images.xcassets */; };
 		932571A0180F36650000B146 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719E180F36650000B146 /* app_icon.png */; };
 		932571A1180F36650000B146 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719F180F36650000B146 /* app_icon@2x.png */; };
@@ -16,7 +17,7 @@
 		93275E9C181A1A6500829966 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9B181A1A6500829966 /* edit.png */; };
 		93275E9E181A1ABD00829966 /* crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9D181A1ABD00829966 /* crop.png */; };
 		93275EA1181A1BA400829966 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA0181A1BA400829966 /* PhotoView.m */; };
-		93275EAA181A23A500829966 /* CropRegionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA9181A23A500829966 /* CropRegionView.m */; };
+		93275EAA181A23A500829966 /* CropRegionCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA9181A23A500829966 /* CropRegionCenterView.m */; };
 		93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EAC181A478F00829966 /* LocalPhotoSaver.m */; };
 		93863FB117FE854400402448 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 93863FB017FE854400402448 /* Database.m */; };
 		93863FB317FE867400402448 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 93863FB217FE867400402448 /* libsqlite3.dylib */; };
@@ -58,6 +59,8 @@
 /* Begin PBXFileReference section */
 		931920C2181E45F20087FCE5 /* CropRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegion.h; sourceTree = "<group>"; };
 		931920C3181E45F20087FCE5 /* CropRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegion.m; sourceTree = "<group>"; };
+		931920C5181ECF530087FCE5 /* CropRegionSideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionSideView.h; sourceTree = "<group>"; };
+		931920C6181ECF530087FCE5 /* CropRegionSideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionSideView.m; sourceTree = "<group>"; };
 		9325719A180F351A0000B146 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9325719E180F36650000B146 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
 		9325719F180F36650000B146 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon@2x.png"; sourceTree = "<group>"; };
@@ -67,8 +70,8 @@
 		93275E9D181A1ABD00829966 /* crop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crop.png; sourceTree = "<group>"; };
 		93275E9F181A1BA400829966 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
 		93275EA0181A1BA400829966 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
-		93275EA8181A23A500829966 /* CropRegionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionView.h; sourceTree = "<group>"; };
-		93275EA9181A23A500829966 /* CropRegionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionView.m; sourceTree = "<group>"; };
+		93275EA8181A23A500829966 /* CropRegionCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionCenterView.h; sourceTree = "<group>"; };
+		93275EA9181A23A500829966 /* CropRegionCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionCenterView.m; sourceTree = "<group>"; };
 		93275EAB181A478F00829966 /* LocalPhotoSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPhotoSaver.h; sourceTree = "<group>"; };
 		93275EAC181A478F00829966 /* LocalPhotoSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalPhotoSaver.m; sourceTree = "<group>"; };
 		93863FAF17FE854400402448 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
@@ -153,10 +156,12 @@
 				93DDB1F8181DDB100063A65A /* FiltersView.m */,
 				93275E9F181A1BA400829966 /* PhotoView.h */,
 				93275EA0181A1BA400829966 /* PhotoView.m */,
+				93275EA8181A23A500829966 /* CropRegionCenterView.h */,
+				93275EA9181A23A500829966 /* CropRegionCenterView.m */,
+				931920C5181ECF530087FCE5 /* CropRegionSideView.h */,
+				931920C6181ECF530087FCE5 /* CropRegionSideView.m */,
 				931920C2181E45F20087FCE5 /* CropRegion.h */,
 				931920C3181E45F20087FCE5 /* CropRegion.m */,
-				93275EA8181A23A500829966 /* CropRegionView.h */,
-				93275EA9181A23A500829966 /* CropRegionView.m */,
 			);
 			name = "Scrapbook Item Edit";
 			sourceTree = "<group>";
@@ -384,9 +389,10 @@
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,
 				93DDB1F9181DDB100063A65A /* FiltersView.m in Sources */,
 				93C8A90517F7D46700C861C4 /* ScrapbookItem.m in Sources */,
+				931920C7181ECF530087FCE5 /* CropRegionSideView.m in Sources */,
 				93863FB117FE854400402448 /* Database.m in Sources */,
 				93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */,
-				93275EAA181A23A500829966 /* CropRegionView.m in Sources */,
+				93275EAA181A23A500829966 /* CropRegionCenterView.m in Sources */,
 				93C8A90817F7D48A00C861C4 /* ScrapbookModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

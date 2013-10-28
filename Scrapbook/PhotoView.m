@@ -23,21 +23,25 @@
 
 - (UIImage *)getCroppedImage
 {
-//    // Get temporary UIImage of pixels in crop region from the original image
-//    CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.imageView.image.CGImage, [self.cropRegionView cropBounds]);
-//    UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
-//    
-//    // Draw UIImage with the new dimensions in the image context
-//    UIGraphicsBeginImageContext(CGSizeMake(320.0, 320.0));
-//    [temp drawInRect:CGRectMake(0, 0, 320, 320)];
-//    UIImage *croppedUIImage = UIGraphicsGetImageFromCurrentImageContext();
-//    
-//    // End the graphics context and release the CGImage
-//    UIGraphicsEndImageContext();
-//    CGImageRelease(croppedCGImage);
-//    
-//    return croppedUIImage;
-    return nil;
+    if(self.cropRegionView.hidden == NO) {
+        // Get temporary UIImage of pixels in crop region from the original image
+        CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.imageView.image.CGImage, [self.cropRegionView cropBounds]);
+        UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
+        
+        // Draw UIImage with the new dimensions in the image context
+        UIGraphicsBeginImageContext(CGSizeMake(320.0, 320.0));
+        [temp drawInRect:CGRectMake(0, 0, 320, 320)];
+        UIImage *croppedUIImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        // End the graphics context and release the CGImage
+        UIGraphicsEndImageContext();
+        CGImageRelease(croppedCGImage);
+        
+        return croppedUIImage;
+    }
+    else {
+        return self.imageView.image;
+    }
 }
 
 - (void)showPhoto:(UIImage *)photo
@@ -72,20 +76,47 @@
 - (void)showCropRegion
 {
     NSLog(@"creating crop region. ");
-    self.cropRegion = [[CropRegion alloc] initWithFrame:CGRectMake(0, 0, 320, 320)];
-    self.cropRegion.parentView = self;
-    [self addSubview:self.cropRegion];
     
-    // Create and show cropping box
-//    self.cropRegionView = [[CropRegionView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
-//    self.cropRegionView.parentView = self;
-//    [self addSubview:self.cropRegionView];
-//    [self.cropRegionView showCropRegion];
+    // Create and show center cropping box
+    self.cropRegionView = [[CropRegionCenterView alloc] initWithFrame:CGRectMake(self.bounds.size.width/7, self.bounds.size.height/7, self.bounds.size.width*5/7, self.bounds.size.height*5/7)];
+    self.cropRegionView.imageBoundsInView = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    self.cropRegionView.parentView = self;
+    [self addSubview:self.cropRegionView];
+    
+    // Create and show side cropping boxes
+    int photoWidth = self.bounds.size.width;
+    int photoHeight = self.bounds.size.height;
+    int originX = self.cropRegionView.frame.origin.x;
+    int originY = self.cropRegionView.frame.origin.y;
+    int width = self.cropRegionView.frame.size.width;
+    int height = self.cropRegionView.frame.size.height;
+    self.leftCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(0, 0, originX, photoHeight)];
+    self.rightCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX+width, 0, photoWidth-originX-width, photoHeight)];
+    self.topCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX, 0, width, originY)];
+    self.bottomCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX, originY+height, width, photoHeight-originY-height)];
+
+    [self addSubview:self.leftCropView];
+    [self addSubview:self.rightCropView];
+    [self addSubview:self.topCropView];
+    [self addSubview:self.bottomCropView];
+}
+
+- (void)resizeCropRegions:(CropRegionCenterView *)sender
+{
+    NSLog(@"resizing crop regions %f", sender.frame.size.height);
+    [self.leftCropView resizeWithx:0 y:0 width:sender.frame.origin.x height:self.bounds.size.height];
+    [self.rightCropView resizeWithx:sender.frame.origin.x+sender.frame.size.width y:0 width:self.frame.size.width-sender.frame.origin.x-sender.frame.size.width+1 height:self.bounds.size.height];
+    [self.topCropView resizeWithx:sender.frame.origin.x y:0 width:sender.frame.size.width height:sender.frame.origin.y];
+    [self.bottomCropView resizeWithx:sender.frame.origin.x y:sender.frame.origin.y+sender.frame.size.height width:sender.frame.size.width height:self.frame.size.height-sender.frame.origin.y-sender.frame.size.height+1];
 }
 
 - (void)toggleCropRegion
 {
-    [self.cropRegion toggleCropRegion];
+    [self.cropRegionView toggleCropRegion];
+    [self.leftCropView toggleCropRegion];
+    [self.rightCropView toggleCropRegion];
+    [self.topCropView toggleCropRegion];
+    [self.bottomCropView toggleCropRegion];
 }
 
 @end
