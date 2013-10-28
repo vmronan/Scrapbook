@@ -20,12 +20,14 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [self.navigationItem setTitle:@"Edit photo"];
         [self.view setBackgroundColor:[UIColor whiteColor]];
-                
+        
+        // Make crop button in navigation bar
+        UIBarButtonItem *cropButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"crop.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleCrop)];
         // Make save button in navigation bar
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
-        [self.navigationItem setRightBarButtonItem:saveButton animated:NO];
+        
+        [self.navigationItem setRightBarButtonItems:[[NSArray alloc] initWithObjects:saveButton, cropButton, nil] animated:YES];
     }
     return self;
 }
@@ -42,23 +44,16 @@
     // Get adjusted height of current image
     
     // Define filter row's height
-    int filterRowHeight = 80*self.origImage.size.height/self.origImage.size.width+20;
+    int filterRowHeight = 80*self.origImage.size.height/self.origImage.size.width+16;
     
     // Get current image (with maximum height of the screen's width)
     int screenWidth = self.view.bounds.size.width;
-    self.imageView = [self setImageViewForImage:currentImage withMaxWidth:screenWidth maxHeight:screenWidth atHeight:filterRowHeight];
-    [self.imageView setImage:currentImage];
-    
-    // Define other heights
-    int imageHeight = self.imageView.bounds.size.height;
-    int buttonRowHeight = 40;
-    int textFieldHeight = 30;
-    int space = 4;
+    self.photoView = [[PhotoView alloc] initWithFrame:[self getPhotoFrameForImage:currentImage withMaxWidth:screenWidth maxHeight:screenWidth atHeight:filterRowHeight] photo:currentImage];
     
     // Initialize scrollview
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
     self.scrollView=[[UIScrollView alloc] initWithFrame:fullScreenRect];
-    self.scrollView.contentSize=CGSizeMake(320,filterRowHeight+imageHeight+buttonRowHeight+2*textFieldHeight+5*space);
+    self.scrollView.contentSize=CGSizeMake(320,filterRowHeight+self.photoView.bounds.size.height);
     self.scrollView.userInteractionEnabled = YES;
     
     // Show filter options with original image
@@ -67,44 +62,15 @@
                         [CIFilter filterWithName:@"CIPhotoEffectChrome"],
                         [CIFilter filterWithName:@"CIColorPosterize"],
                         [CIFilter filterWithName:@"CIPixellate"], nil];
-    self.filterNames = [[NSArray alloc] initWithObjects:@"Normal", @"Vignette", @"Chrome", @"Posterize", @"Pixellate", nil];
+    self.filterNames = [[NSArray alloc] initWithObjects:@"Original", @"Vignette", @"Chrome", @"Posterize", @"Pixellate", nil];
     self.filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(0, 0, 320, filterRowHeight) image:self.origImage target:self filters:self.filters filterNames:self.filterNames];
     [self.filtersView showFilters];
     self.filtersView.userInteractionEnabled = YES;
     
-    // Show crop button
-    self.cropButton = [[UIButton alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+space, buttonRowHeight, buttonRowHeight)];
-    [self.cropButton setImage:[UIImage imageNamed:@"crop.png"] forState:UIControlStateNormal];
-    [self.cropButton addTarget:self action:@selector(cropButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Show title field
-    self.titleField = [[UITextField alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+buttonRowHeight+2*space, 300, 30)];
-    [self.titleField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.titleField setPlaceholder:@"Title"];
-    
-    // Show description field
-    self.descriptionField = [[UITextField alloc] initWithFrame:CGRectMake(10, filterRowHeight+imageHeight+buttonRowHeight+textFieldHeight+3*space, 300, 30)];
-    [self.descriptionField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.descriptionField setPlaceholder:@"Description"];
-    
-    // Show title and description in fields if they're already set
-    if(self.item.rowId != -1) {
-        [self.titleField setText:self.item.title];
-        [self.descriptionField setText:self.item.description];
-    }
-    
     // Add buttons and text fields to view
     [self.scrollView addSubview:self.filtersView];
-    [self.scrollView addSubview:self.imageView];
-    [self.scrollView addSubview:self.cropButton];
-    [self.scrollView addSubview:self.titleField];
-    [self.scrollView addSubview:self.descriptionField];
+    [self.scrollView addSubview:self.photoView];
     
-    // Hide keyboard when user touches outside it
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    [self.scrollView addGestureRecognizer:tap];
     self.scrollView.userInteractionEnabled=YES;
     
     // Set view to scrollview
@@ -116,7 +82,7 @@
     NSLog(@"applying filter");
     if([sender.view tag] == -1) {
         // Show original image
-        [self.imageView setImage:self.origImage];
+        [self.photoView showPhoto:self.origImage];
     }
     else {
         CIFilter *filter = [self.filters objectAtIndex:[sender.view tag]];
@@ -134,50 +100,11 @@
         UIImage *newUIImage = [UIImage imageWithCGImage:cgimage];
         CGImageRelease(cgimage);
         
-        [self.imageView setImage:newUIImage];
+        [self.photoView showPhoto:newUIImage];
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.navigationController.navigationBar.translucent = NO;
-}
-
-- (void)cropButtonPressed
-{
-    [self saveItem];
-    
-    // Go to crop view
-    PhotoEditVC *photoCropVC = [[PhotoEditVC alloc] init];
-    photoCropVC.model = self.model;
-    photoCropVC.item = self.item;
-    [photoCropVC showOrigPhoto];       // show original photo to crop
-    [self.navigationController pushViewController:photoCropVC animated:YES];
-}
-
-- (void)saveButtonPressed
-{
-    [self saveItem];
-    
-    // Go to main scrapbook view
-    ScrapbookVC *scrapbookVC = [[ScrapbookVC alloc] init];
-    scrapbookVC.model = self.model;
-    [scrapbookVC update];
-    [self.navigationController pushViewController:scrapbookVC animated:YES];
-}
-
-- (void)saveItem
-{
-    // Save image
-    self.item.currentPath = [LocalPhotoSaver saveEditedImage:self.imageView.image fromOrigPath:self.item.origPath];
-
-    self.item.title = self.titleField.text;
-    self.item.description = self.descriptionField.text;
-    [self.model saveItem:self.item];
-}
-
-- (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y
+- (CGRect)getPhotoFrameForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y
 {
     float imageWidth = image.size.width;
     float imageHeight = image.size.height;
@@ -194,19 +121,50 @@
         height = width / imageWidth * imageHeight;
     }
     
-    return [[UIImageView alloc] initWithFrame:CGRectMake((maxWidth-width)/2, y, width, height)];
+    return CGRectMake((maxWidth-width)/2, y, width, height);
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+- (void)toggleCrop
+{
+    NSLog(@"cropping...");
+    [self.photoView toggleCropRegion];
+//    [self saveItem];
+//    
+//    // Go to crop view
+//    PhotoView *photoCropVC = [[PhotoView alloc] init];
+//    [photoCropVC showOrigPhoto];       // show original photo to crop
+}
+
+- (void)saveButtonPressed
+{
+    [self saveItem];
+    
+    // Go to main scrapbook view
+    ScrapbookVC *scrapbookVC = [[ScrapbookVC alloc] init];
+    scrapbookVC.model = self.model;
+    [scrapbookVC update];
+    [self.navigationController pushViewController:scrapbookVC animated:YES];
+}
+
+- (void)saveItem
+{
+    // Save image
+    self.item.currentPath = [LocalPhotoSaver saveEditedImage:self.photoView.image fromOrigPath:self.item.origPath];
+
+    [self.model saveItem:self.item];
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
-
--(void)dismissKeyboard {
-    NSLog(@"dismissing keyboard");
-    [self.titleField resignFirstResponder];
-    [self.descriptionField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

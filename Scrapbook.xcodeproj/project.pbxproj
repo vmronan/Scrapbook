@@ -14,7 +14,7 @@
 		93275E9A1818985700829966 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93275E991818985700829966 /* Social.framework */; };
 		93275E9C181A1A6500829966 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9B181A1A6500829966 /* edit.png */; };
 		93275E9E181A1ABD00829966 /* crop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93275E9D181A1ABD00829966 /* crop.png */; };
-		93275EA1181A1BA400829966 /* PhotoEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA0181A1BA400829966 /* PhotoEditVC.m */; };
+		93275EA1181A1BA400829966 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA0181A1BA400829966 /* PhotoView.m */; };
 		93275EAA181A23A500829966 /* CropRegionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EA9181A23A500829966 /* CropRegionView.m */; };
 		93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 93275EAC181A478F00829966 /* LocalPhotoSaver.m */; };
 		93863FB117FE854400402448 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 93863FB017FE854400402448 /* Database.m */; };
@@ -62,8 +62,8 @@
 		93275E991818985700829966 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		93275E9B181A1A6500829966 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		93275E9D181A1ABD00829966 /* crop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crop.png; sourceTree = "<group>"; };
-		93275E9F181A1BA400829966 /* PhotoEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditVC.h; sourceTree = "<group>"; };
-		93275EA0181A1BA400829966 /* PhotoEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditVC.m; sourceTree = "<group>"; };
+		93275E9F181A1BA400829966 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
+		93275EA0181A1BA400829966 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		93275EA8181A23A500829966 /* CropRegionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionView.h; sourceTree = "<group>"; };
 		93275EA9181A23A500829966 /* CropRegionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionView.m; sourceTree = "<group>"; };
 		93275EAB181A478F00829966 /* LocalPhotoSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalPhotoSaver.h; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 				93C8A8F517F7CD5D00C861C4 /* ScrapbookItemEditVC.xib */,
 				93DDB1F7181DDB100063A65A /* FiltersView.h */,
 				93DDB1F8181DDB100063A65A /* FiltersView.m */,
-				93275E9F181A1BA400829966 /* PhotoEditVC.h */,
-				93275EA0181A1BA400829966 /* PhotoEditVC.m */,
+				93275E9F181A1BA400829966 /* PhotoView.h */,
+				93275EA0181A1BA400829966 /* PhotoView.m */,
 				93275EA8181A23A500829966 /* CropRegionView.h */,
 				93275EA9181A23A500829966 /* CropRegionView.m */,
 			);
@@ -373,7 +373,7 @@
 				93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */,
 				93916233180BC74E008B270F /* InternetImageDownloader.m in Sources */,
 				93C8A90217F7CE1700C861C4 /* PhotoSearchVC.m in Sources */,
-				93275EA1181A1BA400829966 /* PhotoEditVC.m in Sources */,
+				93275EA1181A1BA400829966 /* PhotoView.m in Sources */,
 				93C87FCD17F94F5C0070B7EB /* InstagramVC.m in Sources */,
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,
 				93DDB1F9181DDB100063A65A /* FiltersView.m in Sources */,

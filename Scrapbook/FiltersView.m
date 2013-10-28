@@ -20,9 +20,9 @@
         self.filterNames = filterNames;
         
         self.width = 80;
-        self.height = frame.size.height-20;
+        self.height = frame.size.height-16;
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 80*[filterNames count], self.height+20)];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 80*[filterNames count], frame.size.height)];
         [self addSubview:self.scrollView];
         
         [self shrinkImage:image];
@@ -58,9 +58,10 @@
         [filteredImageView addGestureRecognizer:tap];
         filteredImageView.userInteractionEnabled = YES;
         
-        UILabel *filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width*i, self.height, self.width, 20)];
+        UILabel *filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width*i, self.height, self.width, 16)];
         [filterLabel setText:[self.filterNames objectAtIndex:i]];
-        [filterLabel setFont:[UIFont systemFontOfSize:12]];
+        [filterLabel setFont:[UIFont systemFontOfSize:11]];
+        [filterLabel setBackgroundColor:[UIColor whiteColor]];
         [filterLabel setTextAlignment:NSTextAlignmentCenter];
         
         [self.scrollView addSubview:filteredImageView];

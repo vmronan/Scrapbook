@@ -8,21 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "ScrapbookModel.h"
-#import "PhotoEditVC.h"
+#import "PhotoView.h"
 #import "FiltersView.h"
 
 @interface ScrapbookItemEditVC : UIViewController
 
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) ScrapbookItem *item;
+
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) FiltersView *filtersView;
-@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) PhotoView *photoView;
 @property (strong, nonatomic) UIImage *origImage;
-@property (strong, nonatomic) UITextField *titleField;
-@property (strong, nonatomic) UITextField *descriptionField;
-@property (strong, nonatomic) UIButton *cropButton;
-@property (strong, nonatomic) UIButton *revertButton;
 
 @property (strong, nonatomic) NSArray *filters;
 @property (strong, nonatomic) NSArray *filterNames;
@@ -31,5 +28,6 @@
 - (void)saveItem;
 - (void)showView;
 - (void)cropButtonPressed;
+- (CGRect)getPhotoFrameForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y;
 
 @end
