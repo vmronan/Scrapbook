@@ -22,6 +22,9 @@
         self.width = 80;
         self.height = frame.size.height-20;
         
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 80*[filterNames count], self.height+20)];
+        [self addSubview:self.scrollView];
+        
         [self shrinkImage:image];
     }
     return self;
@@ -60,8 +63,8 @@
         [filterLabel setFont:[UIFont systemFontOfSize:12]];
         [filterLabel setTextAlignment:NSTextAlignmentCenter];
         
-        [self addSubview:filteredImageView];
-        [self addSubview:filterLabel];
+        [self.scrollView addSubview:filteredImageView];
+        [self.scrollView addSubview:filterLabel];
     }
 }
 

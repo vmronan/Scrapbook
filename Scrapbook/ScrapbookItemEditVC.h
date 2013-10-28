@@ -31,6 +31,5 @@
 - (void)saveItem;
 - (void)showView;
 - (void)cropButtonPressed;
-- (void)showPhotoAtPath:(NSString*)path;
 
 @end

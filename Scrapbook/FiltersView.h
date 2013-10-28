@@ -13,6 +13,7 @@
 @property int height;
 @property int width;
 @property (strong, nonatomic) UIImage *image;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property id target;
 
 @property (strong, nonatomic) NSArray *filters;
@@ -20,6 +21,5 @@
 
 - (id)initWithFrame:(CGRect)frame image:(UIImage *)image target:(id)target filters:(NSArray *)filters filterNames:(NSArray *)filterNames;
 - (void)showFilters;
-- (void)test;
 
 @end

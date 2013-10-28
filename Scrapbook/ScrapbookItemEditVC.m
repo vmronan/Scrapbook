@@ -62,10 +62,12 @@
     self.scrollView.userInteractionEnabled = YES;
     
     // Show filter options with original image
-    self.filters = [[NSArray alloc] initWithObjects:[CIFilter filterWithName:@"CIVignette"],
+    self.filters = [[NSArray alloc] initWithObjects:
+                        [CIFilter filterWithName:@"CIVignette"],
                         [CIFilter filterWithName:@"CIPhotoEffectChrome"],
-                        [CIFilter filterWithName:@"CIColorPosterize"], nil];
-    self.filterNames = [[NSArray alloc] initWithObjects:@"Normal", @"Vignette", @"Chrome", @"Posterize", nil];
+                        [CIFilter filterWithName:@"CIColorPosterize"],
+                        [CIFilter filterWithName:@"CIPixellate"], nil];
+    self.filterNames = [[NSArray alloc] initWithObjects:@"Normal", @"Vignette", @"Chrome", @"Posterize", @"Pixellate", nil];
     self.filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(0, 0, 320, filterRowHeight) image:self.origImage target:self filters:self.filters filterNames:self.filterNames];
     [self.filtersView showFilters];
     self.filtersView.userInteractionEnabled = YES;
@@ -99,10 +101,10 @@
     [self.scrollView addSubview:self.descriptionField];
     
     // Hide keyboard when user touches outside it
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self
-//                                   action:@selector(dismissKeyboard)];
-//    [self.scrollView addGestureRecognizer:tap];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.scrollView addGestureRecognizer:tap];
     self.scrollView.userInteractionEnabled=YES;
     
     // Set view to scrollview
@@ -167,14 +169,12 @@
 
 - (void)saveItem
 {
+    // Save image
+    self.item.currentPath = [LocalPhotoSaver saveEditedImage:self.imageView.image fromOrigPath:self.item.origPath];
+
     self.item.title = self.titleField.text;
     self.item.description = self.descriptionField.text;
     [self.model saveItem:self.item];
-}
-
-- (void)editPhotoAtPath:(NSString *)path
-{
-    [self showPhotoAtPath:path];
 }
 
 - (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y
