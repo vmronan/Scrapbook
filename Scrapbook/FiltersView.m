@@ -20,9 +20,9 @@
         self.filterNames = filterNames;
         
         self.width = 80;
-        self.height = frame.size.height-20;
+        self.height = frame.size.height-16;
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 80*[filterNames count], self.height+20)];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 80*[filterNames count], frame.size.height)];
         [self addSubview:self.scrollView];
         
         [self shrinkImage:image];
@@ -51,18 +51,18 @@
         }
         
         // Put filtered image in imageview and add tap recognizer
-        UIImageView *filteredImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.width*i, 0, self.width, self.height)];
+        UIImageView *filteredImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.width*i+1, 0, self.width-2, self.height)];
         [filteredImageView setImage:filteredImage];
         filteredImageView.tag = i-1;
         UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.target action:@selector(applyFilter:)];
         [filteredImageView addGestureRecognizer:tap];
         filteredImageView.userInteractionEnabled = YES;
         
-        UILabel *filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width*i, self.height, self.width, 20)];
+        UILabel *filterLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width*i, self.height, self.width, 16)];
         [filterLabel setText:[self.filterNames objectAtIndex:i]];
-        [filterLabel setFont:[UIFont systemFontOfSize:12]];
+        [filterLabel setFont:[UIFont systemFontOfSize:11]];
+        [filterLabel setBackgroundColor:[UIColor whiteColor]];
         [filterLabel setTextAlignment:NSTextAlignmentCenter];
-        
         [self.scrollView addSubview:filteredImageView];
         [self.scrollView addSubview:filterLabel];
     }

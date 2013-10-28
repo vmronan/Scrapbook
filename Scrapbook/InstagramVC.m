@@ -214,7 +214,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    EditPhotoVC *scrapbookItemEditVC = [[EditPhotoVC alloc] initWithNibName:@"EditPhotoVC" bundle:nil];
     
     // Pass the selected object to the new view controller.
     ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[self.photos objectAtIndex:indexPath.row] title:nil description:nil rowId:-1];

@@ -31,7 +31,7 @@
 - (void)editButtonPressed
 {
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    EditPhotoVC *scrapbookItemEditVC = [[EditPhotoVC alloc] initWithNibName:@"EditPhotoVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
     scrapbookItemEditVC.item = self.item;
@@ -53,7 +53,6 @@
     
     // Show image with height of the screen's width
     int screenWidth = self.view.bounds.size.width;
-    float scaledImageWidth = image.size.width / image.size.height * screenWidth;
     UIImageView *imageView = [self setImageViewForImage:image withMaxWidth:self.view.bounds.size.width maxHeight:self.view.bounds.size.height - 64];
     [imageView setImage:image];
     [self.view addSubview:imageView];

@@ -52,10 +52,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self.imagePickerVC dismissViewControllerAnimated:YES completion:nil];
-    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    EditPhotoVC *scrapbookItemEditVC = [[EditPhotoVC alloc] initWithNibName:@"EditPhotoVC" bundle:nil];
     ScrapbookItem *item = [[ScrapbookItem alloc] initWithImage:[info objectForKey:@"UIImagePickerControllerOriginalImage"] title:nil description:nil rowId:-1];
-    [scrapbookItemEditVC setItem:item];
+    scrapbookItemEditVC.item = item;
+    [scrapbookItemEditVC showView];
     scrapbookItemEditVC.model = self.model;
+    
     [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PhotoTagSearcher.h"
-#import "ScrapbookItemEditVC.h"
+#import "EditPhotoVC.h"
 #import "InternetImageDownloader.h"
 
 @interface FlickrVC : UITableViewController

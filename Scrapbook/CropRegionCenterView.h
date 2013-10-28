@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CropRegionView : UIView
+@interface CropRegionCenterView : UIView
 
 @property (strong, nonatomic) UIImageView *parentView;
 @property CGRect imageBoundsInView;
+@property UIPinchGestureRecognizer *pinchRecognizer;
 
 - (void)checkBounds;
 - (CGRect)cropBounds;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)toggleCropRegion;
 
 @end

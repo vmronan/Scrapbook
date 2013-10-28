@@ -6,17 +6,20 @@
 //  Copyright (c) 2013 Vanessa Ronan. All rights reserved.
 //
 
-#import "CropRegionView.h"
+#import "CropRegionCenterView.h"
 
-@implementation CropRegionView
+@implementation CropRegionCenterView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setBackgroundColor:[UIColor whiteColor]];
-        [self setAlpha:0.5];
+        self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(resize)];
+        [self addGestureRecognizer:self.pinchRecognizer];
+        
+//        [self setBackgroundColor:[UIColor redColor]];
+//        [self setAlpha:0.5];
     }
     return self;
 }
@@ -70,7 +73,30 @@
     }
     
     // move to the bounded location
-    self.frame = CGRectMake(newX, newY, self.frame.size.width, self.frame.size.height);
+    self.frame = CGRectMake((int)newX, (int)newY, (int)self.frame.size.width, (int)self.frame.size.height);
+    [self.superview performSelector:@selector(resizeCropRegions:) withObject:self];
+    
+}
+
+- (void)resize
+{
+    CGFloat new_size;
+    
+    if (self.pinchRecognizer.scale < 1.0) {
+        new_size = self.frame.size.width + (self.pinchRecognizer.velocity / self.pinchRecognizer.scale);
+    } else {
+        
+        new_size = self.frame.size.width + self.pinchRecognizer.velocity;
+    }
+    
+    if(new_size > self.imageBoundsInView.size.height) {
+        new_size = self.imageBoundsInView.size.height;
+    }
+    
+    CGFloat delta = (self.frame.size.width - new_size)/2;
+    self.frame = CGRectMake(self.frame.origin.x + delta, self.frame.origin.y + delta, new_size, new_size);
+    
+    [self checkBounds];
 }
 
 /*
@@ -96,6 +122,16 @@
     // original_image_height - inImageY - inImageSize because the CIImage cooridnate system is flipped in the y
     // dimension
     return CGRectMake(inImageX, inImageY, inImageSize, inImageSize);
+}
+
+- (void)toggleCropRegion
+{
+    if([self isHidden]) {
+        self.hidden = NO;
+    }
+    else {
+        self.hidden = YES;
+    }
 }
 
 

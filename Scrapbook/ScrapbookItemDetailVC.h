@@ -10,7 +10,7 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import "ScrapbookModel.h"
-#import "ScrapbookItemEditVC.h"
+#import "EditPhotoVC.h"
 
 @interface ScrapbookItemDetailVC : UIViewController
 
