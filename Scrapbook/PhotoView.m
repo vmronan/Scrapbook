@@ -17,6 +17,7 @@
         // Custom initialization
         [self showPhoto:photo];
         [self showCropRegion];
+        [self toggleCropRegion];
     }
     return self;
 }
@@ -24,7 +25,6 @@
 - (UIImage *)getCroppedImage
 {
     if(self.cropRegionView.hidden == NO) {
-        NSLog(@"getting cropped image");
         // Get temporary UIImage of pixels in crop region from the original image
         CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.image.CGImage, [self.cropRegionView cropBounds]);
         UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
@@ -41,7 +41,6 @@
         return croppedUIImage;
     }
     else {
-        NSLog(@"getting original image");
         return self.image;
     }
 }
@@ -77,8 +76,6 @@
 
 - (void)showCropRegion
 {
-    NSLog(@"creating crop region. ");
-    
     // Create and show center cropping box
     self.cropRegionView = [[CropRegionCenterView alloc] initWithFrame:CGRectMake(self.bounds.size.height/7, self.bounds.size.height/7, self.bounds.size.height*5/7, self.bounds.size.height*5/7)];
     self.cropRegionView.imageBoundsInView = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
@@ -95,7 +92,7 @@
     self.leftCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(0, 0, originX, photoHeight)];
     self.rightCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX+width, 0, photoWidth-originX-width, photoHeight)];
     self.topCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX, 0, width, originY)];
-    self.bottomCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX, originY+height, width, photoHeight-originY-height)];
+    self.bottomCropView = [[CropRegionSideView alloc] initWithFrame:CGRectMake(originX, originY+height, width, photoHeight-originY-height+1)];
 
     [self addSubview:self.leftCropView];
     [self addSubview:self.rightCropView];
@@ -105,9 +102,8 @@
 
 - (void)resizeCropRegions:(CropRegionCenterView *)sender
 {
-    NSLog(@"resizing crop regions %f", sender.frame.size.height);
-    [self.leftCropView resizeWithx:0 y:0 width:sender.frame.origin.x height:self.bounds.size.height];
-    [self.rightCropView resizeWithx:sender.frame.origin.x+sender.frame.size.width y:0 width:self.frame.size.width-sender.frame.origin.x-sender.frame.size.width+1 height:self.bounds.size.height];
+    [self.leftCropView resizeWithx:0 y:0 width:sender.frame.origin.x height:self.bounds.size.height+1];
+    [self.rightCropView resizeWithx:sender.frame.origin.x+sender.frame.size.width y:0 width:self.frame.size.width-sender.frame.origin.x-sender.frame.size.width+1 height:self.bounds.size.height+1];
     [self.topCropView resizeWithx:sender.frame.origin.x y:0 width:sender.frame.size.width height:sender.frame.origin.y];
     [self.bottomCropView resizeWithx:sender.frame.origin.x y:sender.frame.origin.y+sender.frame.size.height width:sender.frame.size.width height:self.frame.size.height-sender.frame.origin.y-sender.frame.size.height+1];
 }

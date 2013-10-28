@@ -10,8 +10,9 @@
 #import "ScrapbookModel.h"
 #import "PhotoView.h"
 #import "FiltersView.h"
+#import "EditTextVC.h"
 
-@interface ScrapbookItemEditVC : UIViewController
+@interface EditPhotoVC : UIViewController
 
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) ScrapbookItem *item;
@@ -20,12 +21,12 @@
 @property (strong, nonatomic) FiltersView *filtersView;
 @property (strong, nonatomic) PhotoView *photoView;
 @property (strong, nonatomic) UIImage *origImage;
+@property (strong, nonatomic) UIImage *currentImage;
 
 @property (strong, nonatomic) NSArray *filters;
 @property (strong, nonatomic) NSArray *filterNames;
 
 - (void)applyFilter:(UITapGestureRecognizer*)sender;
-- (void)saveItem;
 - (void)showView;
 - (CGRect)getPhotoFrameForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight atHeight:(int)y;
 

@@ -6,14 +6,13 @@
 //  Copyright (c) 2013 Vanessa Ronan. All rights reserved.
 //
 
-#import "ScrapbookItemEditVC.h"
-#import "ScrapbookVC.h"
+#import "EditPhotoVC.h"
 
-@interface ScrapbookItemEditVC ()
+@interface EditPhotoVC ()
 
 @end
 
-@implementation ScrapbookItemEditVC
+@implementation EditPhotoVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,10 +23,10 @@
         
         // Make crop button in navigation bar
         UIBarButtonItem *cropButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"crop.png"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleCrop)];
-        // Make save button in navigation bar
-        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
+        // Make next button in navigation bar
+        UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"next.png"] style:UIBarButtonItemStylePlain target:self action:@selector(nextButtonPressed)];
         
-        [self.navigationItem setRightBarButtonItems:[[NSArray alloc] initWithObjects:saveButton, cropButton, nil] animated:YES];
+        [self.navigationItem setRightBarButtonItems:[[NSArray alloc] initWithObjects:nextButton, cropButton, nil] animated:YES];
     }
     return self;
 }
@@ -40,14 +39,14 @@
     
     // Get current image
     NSData *pngCurrentData = [NSData dataWithContentsOfFile:self.item.currentPath];
-    UIImage *currentImage = [UIImage imageWithData:pngCurrentData];
+    self.currentImage = [UIImage imageWithData:pngCurrentData];
     
     // Define filter row's height
     int filterRowHeight = 80*self.origImage.size.height/self.origImage.size.width+16;
     
     // Get view for current image (with maximum height of the screen's width)
     int screenWidth = self.view.bounds.size.width;
-    self.photoView = [[PhotoView alloc] initWithFrame:[self getPhotoFrameForImage:currentImage withMaxWidth:screenWidth maxHeight:screenWidth atHeight:filterRowHeight] photo:currentImage];
+    self.photoView = [[PhotoView alloc] initWithFrame:[self getPhotoFrameForImage:self.currentImage withMaxWidth:screenWidth maxHeight:screenWidth atHeight:filterRowHeight] photo:self.currentImage];
     
     // Initialize scrollview
     CGRect fullScreenRect=[[UIScreen mainScreen] applicationFrame];
@@ -74,7 +73,6 @@
 
 - (void)applyFilter:(UITapGestureRecognizer *)sender
 {
-    NSLog(@"applying filter");
     if([sender.view tag] == -1) {
         // Show original image
         [self.photoView showPhoto:self.origImage];
@@ -83,7 +81,7 @@
         CIFilter *filter = [self.filters objectAtIndex:[sender.view tag]];
         CIContext *context = [CIContext contextWithOptions:nil];
         
-        CIImage *original = [CIImage imageWithCGImage:self.origImage.CGImage];
+        CIImage *original = [CIImage imageWithCGImage:self.currentImage.CGImage];
         CIFilter *fadeFilter = [CIFilter filterWithName:@"CIPhotoEffectFade"];
         [fadeFilter setValue:original forKey:@"inputImage"];
         CIImage *newImage = [fadeFilter valueForKey:@"outputImage"];
@@ -130,26 +128,15 @@
     [self.photoView toggleCropRegion];
 }
 
-- (void)saveButtonPressed
-{
-    [self saveItem];
-    
+- (void)nextButtonPressed
+{    
     // Go to main scrapbook view
-    ScrapbookVC *scrapbookVC = [[ScrapbookVC alloc] init];
-    scrapbookVC.model = self.model;
-    [scrapbookVC update];
-    [self.navigationController pushViewController:scrapbookVC animated:YES];
+    EditTextVC *editTextVC = [[EditTextVC alloc] init];
+    editTextVC.model = self.model;
+    editTextVC.item = self.item;
+    [editTextVC setupWithImage:[self.photoView getCroppedImage]];
+    [self.navigationController pushViewController:editTextVC animated:YES];
 }
-
-- (void)saveItem
-{
-    // Save image
-    UIImage *img = [self.photoView getCroppedImage];
-    NSLog(@"saving image of size %f x %f", img.size.width, img.size.height);
-    self.item.currentPath = [LocalPhotoSaver saveEditedImage:[self.photoView getCroppedImage] fromOrigPath:self.item.origPath];
-    [self.model saveItem:self.item];
-}
-
 
 - (void)viewDidLoad
 {

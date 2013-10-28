@@ -31,7 +31,7 @@
 - (void)editButtonPressed
 {
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    EditPhotoVC *scrapbookItemEditVC = [[EditPhotoVC alloc] initWithNibName:@"EditPhotoVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
     scrapbookItemEditVC.item = self.item;
@@ -107,26 +107,6 @@
     [composeViewController addImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:self.item.currentPath]]];
     [self presentViewController:composeViewController animated:YES completion:nil];
 }
-
--(void)dismissKeyboard {
-    NSLog(@"dismissing keyboard");
-//    [self.titleField resignFirstResponder];
-//    [self.descriptionField resignFirstResponder];
-}
-
-/*
- // Hide keyboard when user touches outside it
- UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
- initWithTarget:self
- action:@selector(dismissKeyboard)];
- [self.scrollView addGestureRecognizer:tap];
- 
- // Show title and description in fields if they're already set
- if(self.item.rowId != -1) {
- [self.titleField setText:self.item.title];
- [self.descriptionField setText:self.item.description];
- }
- */
 
 - (void)viewDidLoad
 {

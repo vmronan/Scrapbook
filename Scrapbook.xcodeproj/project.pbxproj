@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		931920C4181E45F20087FCE5 /* CropRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 931920C3181E45F20087FCE5 /* CropRegion.m */; };
 		931920C7181ECF530087FCE5 /* CropRegionSideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 931920C6181ECF530087FCE5 /* CropRegionSideView.m */; };
+		931920C9181F160C0087FCE5 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 931920C8181F160C0087FCE5 /* next.png */; };
+		931920CC181F16790087FCE5 /* EditTextVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 931920CB181F16790087FCE5 /* EditTextVC.m */; };
 		9325719B180F351A0000B146 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9325719A180F351A0000B146 /* Images.xcassets */; };
 		932571A0180F36650000B146 /* app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719E180F36650000B146 /* app_icon.png */; };
 		932571A1180F36650000B146 /* app_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9325719F180F36650000B146 /* app_icon@2x.png */; };
@@ -42,8 +43,8 @@
 		93C8A8DF17F7CBCF00C861C4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C8A8DE17F7CBCF00C861C4 /* Default.png */; };
 		93C8A8E117F7CBCF00C861C4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C8A8E017F7CBCF00C861C4 /* Default@2x.png */; };
 		93C8A8E317F7CBCF00C861C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C8A8E217F7CBCF00C861C4 /* Default-568h@2x.png */; };
-		93C8A8F617F7CD5D00C861C4 /* ScrapbookItemEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A8F417F7CD5C00C861C4 /* ScrapbookItemEditVC.m */; };
-		93C8A8F717F7CD5D00C861C4 /* ScrapbookItemEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C8A8F517F7CD5D00C861C4 /* ScrapbookItemEditVC.xib */; };
+		93C8A8F617F7CD5D00C861C4 /* EditPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A8F417F7CD5C00C861C4 /* EditPhotoVC.m */; };
+		93C8A8F717F7CD5D00C861C4 /* EditPhotoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C8A8F517F7CD5D00C861C4 /* EditPhotoVC.xib */; };
 		93C8A8FB17F7CD6400C861C4 /* ScrapbookItemDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A8F917F7CD6400C861C4 /* ScrapbookItemDetailVC.m */; };
 		93C8A8FC17F7CD6400C861C4 /* ScrapbookItemDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C8A8FA17F7CD6400C861C4 /* ScrapbookItemDetailVC.xib */; };
 		93C8A8FF17F7CDC100C861C4 /* ScrapbookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C8A8FE17F7CDC100C861C4 /* ScrapbookVC.m */; };
@@ -57,10 +58,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		931920C2181E45F20087FCE5 /* CropRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegion.h; sourceTree = "<group>"; };
-		931920C3181E45F20087FCE5 /* CropRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegion.m; sourceTree = "<group>"; };
 		931920C5181ECF530087FCE5 /* CropRegionSideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropRegionSideView.h; sourceTree = "<group>"; };
 		931920C6181ECF530087FCE5 /* CropRegionSideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropRegionSideView.m; sourceTree = "<group>"; };
+		931920C8181F160C0087FCE5 /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next.png; sourceTree = "<group>"; };
+		931920CA181F16790087FCE5 /* EditTextVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTextVC.h; sourceTree = "<group>"; };
+		931920CB181F16790087FCE5 /* EditTextVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTextVC.m; sourceTree = "<group>"; };
 		9325719A180F351A0000B146 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9325719E180F36650000B146 /* app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon.png; sourceTree = "<group>"; };
 		9325719F180F36650000B146 /* app_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app_icon@2x.png"; sourceTree = "<group>"; };
@@ -107,9 +109,9 @@
 		93C8A8DE17F7CBCF00C861C4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		93C8A8E017F7CBCF00C861C4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		93C8A8E217F7CBCF00C861C4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		93C8A8F317F7CD5C00C861C4 /* ScrapbookItemEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrapbookItemEditVC.h; sourceTree = "<group>"; };
-		93C8A8F417F7CD5C00C861C4 /* ScrapbookItemEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookItemEditVC.m; sourceTree = "<group>"; };
-		93C8A8F517F7CD5D00C861C4 /* ScrapbookItemEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrapbookItemEditVC.xib; sourceTree = "<group>"; };
+		93C8A8F317F7CD5C00C861C4 /* EditPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhotoVC.h; sourceTree = "<group>"; };
+		93C8A8F417F7CD5C00C861C4 /* EditPhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhotoVC.m; sourceTree = "<group>"; };
+		93C8A8F517F7CD5D00C861C4 /* EditPhotoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPhotoVC.xib; sourceTree = "<group>"; };
 		93C8A8F817F7CD6400C861C4 /* ScrapbookItemDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrapbookItemDetailVC.h; sourceTree = "<group>"; };
 		93C8A8F917F7CD6400C861C4 /* ScrapbookItemDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrapbookItemDetailVC.m; sourceTree = "<group>"; };
 		93C8A8FA17F7CD6400C861C4 /* ScrapbookItemDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrapbookItemDetailVC.xib; sourceTree = "<group>"; };
@@ -149,9 +151,11 @@
 		93275EA2181A1BCB00829966 /* Scrapbook Item Edit */ = {
 			isa = PBXGroup;
 			children = (
-				93C8A8F317F7CD5C00C861C4 /* ScrapbookItemEditVC.h */,
-				93C8A8F417F7CD5C00C861C4 /* ScrapbookItemEditVC.m */,
-				93C8A8F517F7CD5D00C861C4 /* ScrapbookItemEditVC.xib */,
+				93C8A8F317F7CD5C00C861C4 /* EditPhotoVC.h */,
+				93C8A8F417F7CD5C00C861C4 /* EditPhotoVC.m */,
+				93C8A8F517F7CD5D00C861C4 /* EditPhotoVC.xib */,
+				931920CA181F16790087FCE5 /* EditTextVC.h */,
+				931920CB181F16790087FCE5 /* EditTextVC.m */,
 				93DDB1F7181DDB100063A65A /* FiltersView.h */,
 				93DDB1F8181DDB100063A65A /* FiltersView.m */,
 				93275E9F181A1BA400829966 /* PhotoView.h */,
@@ -160,8 +164,6 @@
 				93275EA9181A23A500829966 /* CropRegionCenterView.m */,
 				931920C5181ECF530087FCE5 /* CropRegionSideView.h */,
 				931920C6181ECF530087FCE5 /* CropRegionSideView.m */,
-				931920C2181E45F20087FCE5 /* CropRegion.h */,
-				931920C3181E45F20087FCE5 /* CropRegion.m */,
 			);
 			name = "Scrapbook Item Edit";
 			sourceTree = "<group>";
@@ -271,6 +273,7 @@
 		93C8A8D317F7CBCF00C861C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				931920C8181F160C0087FCE5 /* next.png */,
 				93DDB1F5181A60AB0063A65A /* gallery.png */,
 				93DDB1F3181A5E630063A65A /* search.png */,
 				93275E9D181A1ABD00829966 /* crop.png */,
@@ -358,9 +361,10 @@
 				9391621E180A3CDC008B270F /* instagram@2x.png in Resources */,
 				93C8A8E317F7CBCF00C861C4 /* Default-568h@2x.png in Resources */,
 				93275E9E181A1ABD00829966 /* crop.png in Resources */,
+				931920C9181F160C0087FCE5 /* next.png in Resources */,
 				9325719B180F351A0000B146 /* Images.xcassets in Resources */,
 				93275E9C181A1A6500829966 /* edit.png in Resources */,
-				93C8A8F717F7CD5D00C861C4 /* ScrapbookItemEditVC.xib in Resources */,
+				93C8A8F717F7CD5D00C861C4 /* EditPhotoVC.xib in Resources */,
 				93916226180B4EFE008B270F /* flickr@2x.png in Resources */,
 				93C8A8FC17F7CD6400C861C4 /* ScrapbookItemDetailVC.xib in Resources */,
 				93C87FCE17F94F5C0070B7EB /* InstagramVC.xib in Resources */,
@@ -375,13 +379,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C8A8D917F7CBCF00C861C4 /* main.m in Sources */,
-				931920C4181E45F20087FCE5 /* CropRegion.m in Sources */,
 				93C8A8DD17F7CBCF00C861C4 /* AppDelegate.m in Sources */,
 				93916230180B9B6B008B270F /* ScrapbookItemCellView.m in Sources */,
-				93C8A8F617F7CD5D00C861C4 /* ScrapbookItemEditVC.m in Sources */,
+				93C8A8F617F7CD5D00C861C4 /* EditPhotoVC.m in Sources */,
 				93C8A8FB17F7CD6400C861C4 /* ScrapbookItemDetailVC.m in Sources */,
 				93C8A8FF17F7CDC100C861C4 /* ScrapbookVC.m in Sources */,
 				93C87FC117F94BEF0070B7EB /* PhotoTagSearcher.m in Sources */,
+				931920CC181F16790087FCE5 /* EditTextVC.m in Sources */,
 				93916233180BC74E008B270F /* InternetImageDownloader.m in Sources */,
 				93C8A90217F7CE1700C861C4 /* PhotoSearchVC.m in Sources */,
 				93275EA1181A1BA400829966 /* PhotoView.m in Sources */,

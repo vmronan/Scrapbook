@@ -63,7 +63,6 @@
         [filterLabel setFont:[UIFont systemFontOfSize:11]];
         [filterLabel setBackgroundColor:[UIColor whiteColor]];
         [filterLabel setTextAlignment:NSTextAlignmentCenter];
-        
         [self.scrollView addSubview:filteredImageView];
         [self.scrollView addSubview:filterLabel];
     }
