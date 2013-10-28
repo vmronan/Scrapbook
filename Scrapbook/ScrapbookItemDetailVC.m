@@ -31,14 +31,15 @@
 - (void)editButtonPressed
 {
     // Create the next view controller.
-    ScrapbookItemEditVC *scrapbookItemCreateVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
+    ScrapbookItemEditVC *scrapbookItemEditVC = [[ScrapbookItemEditVC alloc] initWithNibName:@"ScrapbookItemEditVC" bundle:nil];
 
     // Pass the selected object to the new view controller.
-    [scrapbookItemCreateVC editItem:self.item];
-    scrapbookItemCreateVC.model = self.model;
+    scrapbookItemEditVC.item = self.item;
+    [scrapbookItemEditVC showView];
+    scrapbookItemEditVC.model = self.model;
     
     // Push the view controller.
-    [self.navigationController pushViewController:scrapbookItemCreateVC animated:YES];
+    [self.navigationController pushViewController:scrapbookItemEditVC animated:YES];
 }
 
 - (void)showItemAtIndex:(int)index
@@ -53,19 +54,19 @@
     // Show image with height of the screen's width
     int screenWidth = self.view.bounds.size.width;
     float scaledImageWidth = image.size.width / image.size.height * screenWidth;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-scaledImageWidth)/2, 0, scaledImageWidth, screenWidth)];
+    UIImageView *imageView = [self setImageViewForImage:image withMaxWidth:self.view.bounds.size.width maxHeight:self.view.bounds.size.height - 64];
     [imageView setImage:image];
     [self.view addSubview:imageView];
     
     // Show title below image
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, screenWidth, screenWidth, 30)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, imageView.bounds.size.height, screenWidth, 30)];
     title.text = self.item.title;
     title.textAlignment = NSTextAlignmentCenter;
     title.textColor = [UIColor blackColor];
     [self.view addSubview:title];
     
     // Show description below title
-    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 26+screenWidth, screenWidth, 30)];
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(0, 30+imageView.bounds.size.height, screenWidth, 30)];
     description.text = self.item.description;
     description.font = [UIFont systemFontOfSize:14];
     description.textAlignment = NSTextAlignmentCenter;
@@ -78,6 +79,26 @@
     [postButton setFrame:CGRectMake(10, screenWidth+60, 300, 30)];
     [postButton addTarget:self action:@selector(presentPostComposer) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:postButton];
+}
+
+- (UIImageView *)setImageViewForImage:(UIImage *)image withMaxWidth:(int)maxWidth maxHeight:(int)maxHeight
+{
+    float imageWidth = image.size.width;
+    float imageHeight = image.size.height;
+    float width, height;    // to be defined
+    
+    if(imageHeight/imageWidth > 1.0) {
+        // Image is tall (or square)
+        height = maxHeight;
+        width = height / imageHeight * imageWidth;
+    }
+    else {
+        // Image is wide
+        width = maxWidth;
+        height = width / imageWidth * imageHeight;
+    }
+    
+    return [[UIImageView alloc] initWithFrame:CGRectMake((maxWidth-width)/2, 0, width, height)];
 }
 
 - (void)presentPostComposer

@@ -51,6 +51,7 @@
 		93DDB1F2181A51740063A65A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93DDB1F1181A51740063A65A /* CoreImage.framework */; };
 		93DDB1F4181A5E630063A65A /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DDB1F3181A5E630063A65A /* search.png */; };
 		93DDB1F6181A60AB0063A65A /* gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 93DDB1F5181A60AB0063A65A /* gallery.png */; };
+		93DDB1F9181DDB100063A65A /* FiltersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93DDB1F8181DDB100063A65A /* FiltersView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,8 @@
 		93DDB1F1181A51740063A65A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		93DDB1F3181A5E630063A65A /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		93DDB1F5181A60AB0063A65A /* gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery.png; sourceTree = "<group>"; };
+		93DDB1F7181DDB100063A65A /* FiltersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersView.h; sourceTree = "<group>"; };
+		93DDB1F8181DDB100063A65A /* FiltersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,8 @@
 				93C8A8F317F7CD5C00C861C4 /* ScrapbookItemEditVC.h */,
 				93C8A8F417F7CD5C00C861C4 /* ScrapbookItemEditVC.m */,
 				93C8A8F517F7CD5D00C861C4 /* ScrapbookItemEditVC.xib */,
+				93DDB1F7181DDB100063A65A /* FiltersView.h */,
+				93DDB1F8181DDB100063A65A /* FiltersView.m */,
 				93275E9F181A1BA400829966 /* PhotoEditVC.h */,
 				93275EA0181A1BA400829966 /* PhotoEditVC.m */,
 				93275EA8181A23A500829966 /* CropRegionView.h */,
@@ -371,6 +376,7 @@
 				93275EA1181A1BA400829966 /* PhotoEditVC.m in Sources */,
 				93C87FCD17F94F5C0070B7EB /* InstagramVC.m in Sources */,
 				93C87FC817F94F330070B7EB /* FlickrVC.m in Sources */,
+				93DDB1F9181DDB100063A65A /* FiltersView.m in Sources */,
 				93C8A90517F7D46700C861C4 /* ScrapbookItem.m in Sources */,
 				93863FB117FE854400402448 /* Database.m in Sources */,
 				93275EAD181A478F00829966 /* LocalPhotoSaver.m in Sources */,

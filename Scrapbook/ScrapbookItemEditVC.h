@@ -9,18 +9,27 @@
 #import <UIKit/UIKit.h>
 #import "ScrapbookModel.h"
 #import "PhotoEditVC.h"
+#import "FiltersView.h"
 
 @interface ScrapbookItemEditVC : UIViewController
 
 @property (strong, nonatomic) ScrapbookModel *model;
 @property (strong, nonatomic) ScrapbookItem *item;
-@property (strong, nonatomic) IBOutlet UITextField *titleField;
-@property (strong, nonatomic) IBOutlet UITextField *descriptionField;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) FiltersView *filtersView;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIImage *origImage;
+@property (strong, nonatomic) UITextField *titleField;
+@property (strong, nonatomic) UITextField *descriptionField;
+@property (strong, nonatomic) UIButton *cropButton;
+@property (strong, nonatomic) UIButton *revertButton;
 
+@property (strong, nonatomic) NSArray *filters;
+@property (strong, nonatomic) NSArray *filterNames;
+
+- (void)applyFilter:(UITapGestureRecognizer*)sender;
 - (void)saveItem;
-- (IBAction)cropButtonPressed:(id)sender;
-- (void)editItem:(ScrapbookItem*)item;
-- (void)editPhotoAtPath:(NSString*)path;
-- (void)showPhotoAtPath:(NSString*)path;
+- (void)showView;
+- (void)cropButtonPressed;
 
 @end
