@@ -24,8 +24,9 @@
 - (UIImage *)getCroppedImage
 {
     if(self.cropRegionView.hidden == NO) {
+        NSLog(@"getting cropped image");
         // Get temporary UIImage of pixels in crop region from the original image
-        CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.imageView.image.CGImage, [self.cropRegionView cropBounds]);
+        CGImageRef croppedCGImage = CGImageCreateWithImageInRect(self.image.CGImage, [self.cropRegionView cropBounds]);
         UIImage *temp = [UIImage imageWithCGImage:croppedCGImage];
         
         // Draw UIImage with the new dimensions in the image context
@@ -40,7 +41,8 @@
         return croppedUIImage;
     }
     else {
-        return self.imageView.image;
+        NSLog(@"getting original image");
+        return self.image;
     }
 }
 
@@ -78,7 +80,7 @@
     NSLog(@"creating crop region. ");
     
     // Create and show center cropping box
-    self.cropRegionView = [[CropRegionCenterView alloc] initWithFrame:CGRectMake(self.bounds.size.width/7, self.bounds.size.height/7, self.bounds.size.width*5/7, self.bounds.size.height*5/7)];
+    self.cropRegionView = [[CropRegionCenterView alloc] initWithFrame:CGRectMake(self.bounds.size.height/7, self.bounds.size.height/7, self.bounds.size.height*5/7, self.bounds.size.height*5/7)];
     self.cropRegionView.imageBoundsInView = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     self.cropRegionView.parentView = self;
     [self addSubview:self.cropRegionView];

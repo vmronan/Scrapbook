@@ -51,7 +51,7 @@
         }
         
         // Put filtered image in imageview and add tap recognizer
-        UIImageView *filteredImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.width*i, 0, self.width, self.height)];
+        UIImageView *filteredImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.width*i+1, 0, self.width-2, self.height)];
         [filteredImageView setImage:filteredImage];
         filteredImageView.tag = i-1;
         UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self.target action:@selector(applyFilter:)];

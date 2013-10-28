@@ -73,7 +73,7 @@
     }
     
     // move to the bounded location
-    self.frame = CGRectMake(newX, newY, self.frame.size.width, self.frame.size.height);
+    self.frame = CGRectMake((int)newX, (int)newY, (int)self.frame.size.width, (int)self.frame.size.height);
     [self.superview performSelector:@selector(resizeCropRegions:) withObject:self];
     
 }

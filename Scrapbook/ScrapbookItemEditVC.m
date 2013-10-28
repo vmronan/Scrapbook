@@ -144,8 +144,9 @@
 - (void)saveItem
 {
     // Save image
+    UIImage *img = [self.photoView getCroppedImage];
+    NSLog(@"saving image of size %f x %f", img.size.width, img.size.height);
     self.item.currentPath = [LocalPhotoSaver saveEditedImage:[self.photoView getCroppedImage] fromOrigPath:self.item.origPath];
-
     [self.model saveItem:self.item];
 }
 

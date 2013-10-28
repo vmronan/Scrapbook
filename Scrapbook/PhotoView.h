@@ -12,7 +12,7 @@
 
 @interface PhotoView : UIImageView
 
-@property (strong, nonatomic) UIImageView *imageView;
+//@property (strong, nonatomic) UIImageView *imageView;
 
 @property (strong, nonatomic) CropRegionCenterView *cropRegionView;
 @property (strong, nonatomic) CropRegionSideView *leftCropView;
